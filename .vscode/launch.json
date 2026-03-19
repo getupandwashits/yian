@@ -5,7 +5,7 @@
       "name": "Debug Compiler",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/cmd/compiler/main.py",
+      "program": "${workspaceFolder}/compiler/main.py",
       "args": [
         "compile",
         "-f",
