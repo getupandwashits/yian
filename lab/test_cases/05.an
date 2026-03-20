@@ -1,0 +1,29 @@
+// Focus: loop, break, continue, and while
+
+i32 main() {
+    i32 n = 0
+    i32 sum_odd = 0
+
+    loop {
+        if n >= 10 {
+            break
+        }
+        n += 1
+        if n % 2 == 0 {
+            continue
+        }
+        sum_odd += n
+    }
+
+    i32 k = 1
+    i32 sum_all = 0
+    while k <= 5 {
+        sum_all += k
+        k += 1
+    }
+
+    assert sum_odd == 25: "loop odd sum failed"
+    assert sum_all == 15: "while sum failed"
+
+    return 0
+}

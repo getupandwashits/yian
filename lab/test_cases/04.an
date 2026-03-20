@@ -1,0 +1,28 @@
+// Focus: enum declaration and match expression style control flow
+
+enum Grade {
+    A
+    B
+    C
+    F
+}
+
+i32 score(Grade g) {
+    match g {
+        A { return 4 }
+        B { return 3 }
+        C { return 2 }
+        F { return 0 }
+        _ { return -1 }
+    }
+}
+
+i32 main() {
+    Grade g1 = Grade.A
+    Grade g2 = Grade.C
+
+    assert score(g1) == 4: "grade A failed"
+    assert score(g2) == 2: "grade C failed"
+
+    return 0
+}

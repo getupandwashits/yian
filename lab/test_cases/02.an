@@ -1,0 +1,24 @@
+// Focus: recursion and boolean expressions
+
+i32 factorial(i32 n) {
+    if n <= 1 {
+        return 1
+    }
+    return n * factorial(n - 1)
+}
+
+bool is_odd(i32 n) {
+    return n % 2 == 1
+}
+
+i32 main() {
+    i32 f = factorial(6)
+    bool odd = is_odd(9)
+    bool even = is_odd(8)
+
+    assert f == 720: "factorial failed"
+    assert odd == true: "odd check failed"
+    assert even == false: "even check failed"
+
+    return 0
+}
