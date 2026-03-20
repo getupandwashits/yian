@@ -1,3 +1,5 @@
+from std.collections.hash import Murmur3Hasher, Hash
+
 from slice import SliceIter
 from option import Option
 from iter import Iterator, IntoIterator
@@ -180,5 +182,12 @@ impl Index<Range<u64>, str> for str {
         }
 
         return dyn Self.from_slice(bytes[range.start..range.end])
+    }
+}
+
+impl Hash<Murmur3Hasher> for str {
+    hash(Murmur3Hasher hasher) {
+        u8[] bytes = self.as_slice()
+        hasher.write(bytes)
     }
 }
