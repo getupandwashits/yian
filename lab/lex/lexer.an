@@ -1,7 +1,6 @@
 from std.core.io import read_file, write_file, print
 from std.core.string import String
 from std.collections.hash_set import HashSet
-from std.collections.hash import Murmur3Hasher, Murmur3BuildHasher
 
 enum State {
     Start       // 初始/空闲状态
@@ -37,7 +36,8 @@ append_token(String* out, str kind, str value, u64 line, u64 col) {
 // =====================================================================
 // 关键字判断与输出
 // =====================================================================
-fill_keyword_table(HashSet<str, Murmur3Hasher, Murmur3BuildHasher>* keyword_table) {
+HashSet<str> gen_keyword_table() {
+    HashSet<str> keyword_table = HashSet<str>.with_capacity(64)
     keyword_table.insert("i8")
     keyword_table.insert("i16")
     keyword_table.insert("i32")
@@ -58,9 +58,10 @@ fill_keyword_table(HashSet<str, Murmur3Hasher, Murmur3BuildHasher>* keyword_tabl
     keyword_table.insert("dummy")  // 这是一个示例，实际使用时请替换或删除
 
     // ========================
+    return keyword_table
 }
 
-emit_word(String* out, String text, HashSet<str, Murmur3Hasher, Murmur3BuildHasher>* keyword_table, u64 line, u64 col) {
+emit_word(String* out, String text, HashSet<str>* keyword_table, u64 line, u64 col) {
     // ========= TODO =========
     // 判断 text 是否在 keyword_table 中，如果是则输出 Keyword，否则输出 Ident
 
@@ -73,7 +74,7 @@ emit_word(String* out, String text, HashSet<str, Murmur3Hasher, Murmur3BuildHash
 // 核心: 基于有限自动机的词法分析
 // 结果通过指针追加到 out 缓冲区，每个 token 带行列号
 // =====================================================================
-tokenize(String* out, str source, HashSet<str, Murmur3Hasher, Murmur3BuildHasher>* keyword_table) {
+tokenize(String* out, str source, HashSet<str>* keyword_table) {
     u8[] bytes = source.as_slice()
     u64 len = bytes.len()
     u64 pos = 0
@@ -367,9 +368,7 @@ tokenize(String* out, str source, HashSet<str, Murmur3Hasher, Murmur3BuildHasher
 // 主函数
 // =====================================================================
 i32 main() {
-    HashSet<str, Murmur3Hasher, Murmur3BuildHasher> keyword_table =
-        HashSet<str, Murmur3Hasher, Murmur3BuildHasher>.with_capacity(64)
-    fill_keyword_table(&keyword_table)
+    HashSet<str> keyword_table = gen_keyword_table()
 
     str input_path  = "lab/test_cases/01.an"
     str output_path = "lab/ans/01.txt"
