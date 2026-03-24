@@ -1,0 +1,6 @@
+from std.core.io import print
+
+i32 main() {
+    print("Hello, World!\n")
+    return 0
+}
