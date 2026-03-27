@@ -58,7 +58,7 @@ scripts/yian_compiler.py lab/test_cases/hello.an
 1. `main()` 读取测试输入文件。
 2. `tokenize(...)` 使用有限自动机扫描字符流。
 3. `append_token(...)` 将识别到的 Token 追加到输出缓冲区。
-4. 最终写入输出文件（`lab/ans/xx.txt`）。
+4. 最终写入输出文件（`lab/result/xx.txt`）。
 
 ### 3.3 关键函数
 
@@ -75,6 +75,21 @@ scripts/yian_compiler.py lab/test_cases/hello.an
 2. 单词类别判断：在 `emit_word(...)` 中根据关键字表输出 `Keyword` 或 `Ident`。
 3. 标识符结束时的收束：在 `InIdent` 状态中结束当前词并回到 `Start`。
 4. 行列号更新：在主循环末尾按字符推进 `line/col`，正确处理换行。
+
+### 3.5 测试
+
+你可以通过下面两种方式测试你的词法分析器：
+
+1. 单文件测试  
+   修改 `lab/lex/lexer_main.an` 中的路径配置（第 11-12 行）：
+   - `input_path`：待测试输入文件，例如 `lab/test_cases/01.an`
+   - `output_path`：对应输出文件，例如 `lab/result/01.txt`
+
+   然后执行：
+   `./scripts/yian_compiler.py lab/lex/lexer.an lab/lex/lexer_main.an`
+
+2. 全部文件测试  
+   `./scripts/yian_compiler.py lab/lex/lexer.an lab/lex/lexer_checker.an`
 
 ---
 
