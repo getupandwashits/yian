@@ -36,7 +36,7 @@ append_token(String* out, str kind, str value, u64 line, u64 col) {
 // =====================================================================
 // 关键字判断与输出
 // =====================================================================
-HashSet<str> gen_keyword_table() {
+pub HashSet<str> gen_keyword_table() {
     HashSet<str> keyword_table = HashSet<str>.with_capacity(64)
     keyword_table.insert("i8")
     keyword_table.insert("i16")
@@ -74,7 +74,7 @@ emit_word(String* out, String text, HashSet<str>* keyword_table, u64 line, u64 c
 // 核心: 基于有限自动机的词法分析
 // 结果通过指针追加到 out 缓冲区，每个 token 带行列号
 // =====================================================================
-tokenize(String* out, str source, HashSet<str>* keyword_table) {
+pub tokenize(String* out, str source, HashSet<str>* keyword_table) {
     u8[] bytes = source.as_slice()
     u64 len = bytes.len()
     u64 pos = 0
@@ -286,6 +286,7 @@ tokenize(String* out, str source, HashSet<str>* keyword_table) {
                     // 结束标识符，判断是 Keyword 还是 Ident
                     // 记得调用 emit_word 函数，并传入 keyword_table 以供判断
                     // ========= TODO =========
+                    state = State.Start
                 }
             }
 
@@ -360,29 +361,7 @@ tokenize(String* out, str source, HashSet<str>* keyword_table) {
             // 注意处理换行符 '\n'，它会增加 line 并重置 col
             // 其他字符则增加 col
             // ========= TODO =========
+            old_pos += 1
         }
     }
-}
-
-// =====================================================================
-// 主函数
-// =====================================================================
-i32 main() {
-    HashSet<str> keyword_table = gen_keyword_table()
-
-    str input_path  = "lab/test_cases/01.an"
-    str output_path = "lab/ans/01.txt"
-
-    str source = read_file(input_path)
-
-    String out = String.new()
-    out.push_str("=== Lexer Output ===\n")
-    tokenize(&out, source, &keyword_table)
-
-    write_file(output_path, out.as_str())
-    print("Lexer done. Output written to: ")
-    print(output_path)
-    print("\n")
-
-    return 0
 }

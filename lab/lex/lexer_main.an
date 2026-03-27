@@ -1,0 +1,26 @@
+from std.core.io import read_file, write_file, print
+from std.collections.hash_set import HashSet
+from std.core.string import String
+from lexer import gen_keyword_table, tokenize
+// =====================================================================
+// 主函数
+// =====================================================================
+i32 main() {
+    HashSet<str> keyword_table = gen_keyword_table()
+
+    str input_path  = "lab/test_cases/01.an"
+    str output_path = "lab/result/01.txt"
+
+    str source = read_file(input_path)
+
+    String out = String.new()
+    out.push_str("=== Lexer Output ===\n")
+    tokenize(&out, source, &keyword_table)
+
+    write_file(output_path, out.as_str())
+    print("Lexer done. Output written to: ")
+    print(output_path)
+    print("\n")
+
+    return 0
+}
