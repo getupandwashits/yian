@@ -6,7 +6,7 @@
 - python3.10+
 - clang
 
-## 安装依赖库
+## 安装python相关依赖库
 ```bash
 $ pip install -r ./requirements.txt
 ```
