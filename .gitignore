@@ -357,6 +357,6 @@ target
 #.idea/
 
 # 把 lab 加到 .gitignore 中，避免提交实验数据和结果
-lab/
+labs/
 
 compiler/frontend/grammar/src/parser.c
