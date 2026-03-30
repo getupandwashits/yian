@@ -60,14 +60,21 @@ scripts/yian_compiler.py lab/test_cases/hello.an
 3. `append_token(...)` 将识别到的 Token 追加到输出缓冲区。
 4. 最终写入输出文件（`lab/result/xx.txt`）。
 
-### 3.3 关键函数
+### 3.3 涉及的类型
+- `enum`：[Enum](../../docs/grammar/02.type_system.md#enum)
+- `str`：[str: 字符串切片](../../docs/grammar/08.standard_library.md#str-字符串切片)
+- `String`：[string: 可变字符串](../../docs/grammar/08.standard_library.md#string-可变字符串)
+- `HashSet`：[hash_set: 哈希集合](../../docs/grammar/08.standard_library.md#hash_set-哈希集合)
+- `u8[]`：[切片类型](../../docs/grammar/02.type_system.md#切片类型)
+
+### 3.4 关键函数
 
 - `gen_keyword_table()`：构造关键字集合。
 - `emit_word(...)`：将单词分类为 `Keyword` 或 `Ident`。
 - `tokenize(...)`：状态机主循环，处理标识符、数字、字符串、字符、操作符、分隔符、注释与空白。
 - `append_token(...)`：统一的 Token 输出格式。
 
-### 3.4 需要补全的 TODO
+### 3.5 需要补全的 TODO
 
 你需要在模板中补全以下逻辑：
 
@@ -76,7 +83,7 @@ scripts/yian_compiler.py lab/test_cases/hello.an
 3. 标识符结束时的收束：在 `InIdent` 状态中结束当前词并回到 `Start`。
 4. 行列号更新：在主循环末尾按字符推进 `line/col`，正确处理换行。
 
-### 3.5 测试
+### 3.6 测试
 
 你可以通过下面两种方式测试你的词法分析器：
 
