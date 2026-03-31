@@ -35,7 +35,7 @@ pip install -r requirements.txt
 ### 2.3 验证编译器环境（可选）
 
 ```bash
-scripts/yian_compiler.py lab/test_cases/hello.an
+scripts/yian_compiler.py labs/lab1/test_cases/hello.an
 ./tests/yian_workspace/bin/out
 ```
 
@@ -47,9 +47,9 @@ scripts/yian_compiler.py lab/test_cases/hello.an
 
 ### 3.1 目录与文件
 
-- 实验代码：`lab/lex/lexer.an`
-- 测试输入：`lab/test_cases/01.an ~ 06.an`
-- 期望输出：`lab/ans/01.txt ~ 06.txt`
+- 实验代码：`labs/lab1/lex/lexer.an`
+- 测试输入：`labs/lab1/test_cases/01.an ~ 06.an`
+- 期望输出：`labs/lab1/test_results/01.txt ~ 06.txt`
 
 ### 3.2 主流程
 
@@ -58,7 +58,7 @@ scripts/yian_compiler.py lab/test_cases/hello.an
 1. `main()` 读取测试输入文件。
 2. `tokenize(...)` 使用有限自动机扫描字符流。
 3. `append_token(...)` 将识别到的 Token 追加到输出缓冲区。
-4. 最终写入输出文件（`lab/result/xx.txt`）。
+4. 最终写入输出文件（`labs/lab1/test_results/xx.txt`）。
 
 ### 3.3 涉及的类型
 - `enum`：[Enum](../../docs/grammar/02.type_system.md#enum)
@@ -88,15 +88,15 @@ scripts/yian_compiler.py lab/test_cases/hello.an
 你可以通过下面两种方式测试你的词法分析器：
 
 1. 单文件测试  
-   修改 `lab/lex/lexer_main.an` 中的路径配置（第 11-12 行）：
-   - `input_path`：待测试输入文件，例如 `lab/test_cases/01.an`
-   - `output_path`：对应输出文件，例如 `lab/result/01.txt`
+   修改 `labs/lab1/lex/lexer_main.an` 中的路径配置（第 11-12 行）：
+   - `input_path`：待测试输入文件，例如 `labs/lab1/test_cases/01.an`
+   - `output_path`：对应输出文件，例如 `labs/lab1/test_results/01.txt`
 
    然后执行：
-   `./scripts/yian_compiler.py lab/lex/lexer.an lab/lex/lexer_main.an`
+   `./scripts/yian_compiler.py labs/lab1/lex/lexer.an labs/lab1/lex/lexer_main.an`
 
 2. 全部文件测试  
-   `./scripts/yian_compiler.py lab/lex/lexer.an lab/lex/lexer_checker.an`
+   `./scripts/yian_compiler.py labs/lab1/lex/lexer.an labs/lab1/lex/lexer_checker.an`
 
 ---
 
@@ -123,7 +123,7 @@ scripts/yian_compiler.py lab/test_cases/hello.an
 
 提交内容：
 
-- 你的 `lab/lex/lexer.an`
+- 你的 `labs/lab1/lex/lexer.an`
 - 实验报告
 
 ---
@@ -134,12 +134,12 @@ scripts/yian_compiler.py lab/test_cases/hello.an
 
 ### 5.1 公开测试
 
-- 输入：`lab/test_cases/01.an` ~ `lab/test_cases/06.an`
-- 参考：`lab/ans/01.txt` ~ `lab/ans/06.txt`
+- 输入：`labs/lab1/test_cases/01.an` ~ `labs/lab1/test_cases/06.an`
+- 参考：`labs/lab1/test_results/01.txt` ~ `labs/lab1/test_results/06.txt`
 
 ### 5.2 隐藏测试（用于评分）
 
-- 输入：`lab/test_cases/07.an` ~ `lab/test_cases/10.an` (未包含在公开资料中)
+- 输入：`labs/lab1/test_cases/07.an` ~ `labs/lab1/test_cases/10.an` (未包含在公开资料中)
 - 参考答案不公开。
 
 ---
