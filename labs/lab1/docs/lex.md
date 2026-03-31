@@ -61,11 +61,11 @@ scripts/yian_compiler.py labs/lab1/test_cases/hello.an
 4. 最终写入输出文件（`labs/lab1/test_results/xx.txt`）。
 
 ### 3.3 涉及的类型
-- `enum`：[Enum](../../docs/grammar/02.type_system.md#enum)
-- `str`：[str: 字符串切片](../../docs/grammar/08.standard_library.md#str-字符串切片)
-- `String`：[string: 可变字符串](../../docs/grammar/08.standard_library.md#string-可变字符串)
-- `HashSet`：[hash_set: 哈希集合](../../docs/grammar/08.standard_library.md#hash_set-哈希集合)
-- `u8[]`：[切片类型](../../docs/grammar/02.type_system.md#切片类型)
+- `enum`：[Enum](../../../docs/grammar/02.type_system.md#enum)
+- `str`：[str: 字符串切片](../../../docs/grammar/08.standard_library.md#str-字符串切片)
+- `String`：[string: 可变字符串](../../../docs/grammar/08.standard_library.md#string-可变字符串)
+- `HashSet`：[hash_set: 哈希集合](../../../docs/grammar/08.standard_library.md#hash_set-哈希集合)
+- `u8[]`：[切片类型](../../../docs/grammar/02.type_system.md#切片类型)
 
 ### 3.4 关键函数
 
