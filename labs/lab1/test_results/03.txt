@@ -1,50 +1,50 @@
 === Lexer Output ===
 [3:1] <Keyword, struct>
 [3:8] <Ident, Box2D>
-[3:14] <LBrace, {>
+[3:14] <Keyword, LBrace {>
 [4:5] <Keyword, i32>
 [4:9] <Ident, w>
 [5:5] <Keyword, i32>
 [5:9] <Ident, h>
-[6:1] <RBrace, }>
+[6:1] <Keyword, RBrace }>
 [8:1] <Keyword, i32>
 [8:5] <Ident, area>
-[8:9] <LParen, (>
+[8:9] <Keyword, LParen (>
 [8:10] <Ident, Box2D>
 [8:16] <Ident, b>
-[8:17] <RParen, )>
-[8:19] <LBrace, {>
+[8:17] <Keyword, RParen )>
+[8:19] <Keyword, LBrace {>
 [9:5] <Keyword, return>
 [9:12] <Ident, b>
-[9:13] <Dot, .>
+[9:13] <Keyword, Dot .>
 [9:14] <Ident, w>
-[9:16] <Star, *>
+[9:16] <Keyword, Star *>
 [9:18] <Ident, b>
-[9:19] <Dot, .>
+[9:19] <Keyword, Dot .>
 [9:20] <Ident, h>
-[10:1] <RBrace, }>
+[10:1] <Keyword, RBrace }>
 [12:1] <Keyword, i32>
 [12:5] <Ident, main>
-[12:9] <LParen, (>
-[12:10] <RParen, )>
-[12:12] <LBrace, {>
+[12:9] <Keyword, LParen (>
+[12:10] <Keyword, RParen )>
+[12:12] <Keyword, LBrace {>
 [13:5] <Ident, Box2D>
 [13:11] <Ident, b>
-[13:13] <Assign, =>
+[13:13] <Keyword, Assign =>
 [13:15] <Ident, Box2D>
-[13:20] <LParen, (>
-[13:21] <Number, 3>
-[13:22] <Comma, ,>
-[13:24] <Number, 7>
-[13:25] <RParen, )>
+[13:20] <Keyword, LParen (>
+[13:21] <Literal, 3>
+[13:22] <Keyword, Comma ,>
+[13:24] <Literal, 7>
+[13:25] <Keyword, RParen )>
 [14:5] <Keyword, i32>
 [14:9] <Ident, a>
-[14:11] <Assign, =>
+[14:11] <Keyword, Assign =>
 [14:13] <Ident, area>
-[14:17] <LParen, (>
+[14:17] <Keyword, LParen (>
 [14:18] <Ident, b>
-[14:19] <RParen, )>
+[14:19] <Keyword, RParen )>
 [16:5] <Keyword, return>
-[16:12] <Number, 0>
-[17:1] <RBrace, }>
-[18:1] <EOF, >
+[16:12] <Literal, 0>
+[17:1] <Keyword, RBrace }>
+[18:1] <EOF>

@@ -1,62 +1,62 @@
 === Lexer Output ===
 [3:1] <Keyword, i32>
 [3:5] <Ident, main>
-[3:9] <LParen, (>
-[3:10] <RParen, )>
-[3:12] <LBrace, {>
+[3:9] <Keyword, LParen (>
+[3:10] <Keyword, RParen )>
+[3:12] <Keyword, LBrace {>
 [4:5] <Keyword, i8>
 [4:8] <Ident, a>
-[4:10] <Assign, =>
-[4:12] <Number, 42>
+[4:10] <Keyword, Assign =>
+[4:12] <Literal, 42>
 [5:5] <Keyword, i16>
 [5:9] <Ident, b>
-[5:11] <Assign, =>
-[5:13] <Number, 1000>
+[5:11] <Keyword, Assign =>
+[5:13] <Literal, 1000>
 [6:5] <Keyword, i32>
 [6:9] <Ident, c>
-[6:11] <Assign, =>
-[6:13] <Number, 100000>
+[6:11] <Keyword, Assign =>
+[6:13] <Literal, 100000>
 [7:5] <Keyword, i64>
 [7:9] <Ident, d>
-[7:11] <Assign, =>
-[7:13] <Number, 10000000000>
+[7:11] <Keyword, Assign =>
+[7:13] <Literal, 10000000000>
 [9:5] <Keyword, u8>
 [9:8] <Ident, e>
-[9:10] <Assign, =>
-[9:12] <Number, 255>
+[9:10] <Keyword, Assign =>
+[9:12] <Literal, 255>
 [10:5] <Keyword, u16>
 [10:9] <Ident, f>
-[10:11] <Assign, =>
-[10:13] <Number, 65535>
+[10:11] <Keyword, Assign =>
+[10:13] <Literal, 65535>
 [11:5] <Keyword, u32>
 [11:9] <Ident, g>
-[11:11] <Assign, =>
-[11:13] <Number, 4294967295>
+[11:11] <Keyword, Assign =>
+[11:13] <Literal, 4294967295>
 [12:5] <Keyword, u64>
 [12:9] <Ident, h>
-[12:11] <Assign, =>
-[12:13] <Number, 18446744073709551615>
+[12:11] <Keyword, Assign =>
+[12:13] <Literal, 18446744073709551615>
 [14:5] <Keyword, f32>
 [14:9] <Ident, i>
-[14:11] <Assign, =>
-[14:13] <Number, 3.14>
+[14:11] <Keyword, Assign =>
+[14:13] <Literal, 3.140000>
 [15:5] <Keyword, f64>
 [15:9] <Ident, j>
-[15:11] <Assign, =>
-[15:13] <Number, 2.718281828459045>
+[15:11] <Keyword, Assign =>
+[15:13] <Literal, 2.718281>
 [17:5] <Keyword, char>
 [17:10] <Ident, k>
-[17:12] <Assign, =>
-[17:14] <Char, A>
+[17:12] <Keyword, Assign =>
+[17:14] <Literal, A>
 [18:5] <Keyword, bool>
 [18:10] <Ident, l>
-[18:12] <Assign, =>
+[18:12] <Keyword, Assign =>
 [18:14] <Keyword, true>
 [19:5] <Keyword, str>
 [19:9] <Ident, m>
-[19:11] <Assign, =>
-[19:13] <String, Hello, Yian!\n>
+[19:11] <Keyword, Assign =>
+[19:13] <Literal, Hello, Yian!\n>
 [21:5] <Keyword, return>
-[21:12] <Number, 0>
-[22:1] <RBrace, }>
-[23:1] <EOF, >
+[21:12] <Literal, 0>
+[22:1] <Keyword, RBrace }>
+[23:1] <EOF>

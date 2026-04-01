@@ -1,141 +1,141 @@
 === Lexer Output ===
 [3:1] <Keyword, enum>
 [3:6] <Ident, Grade>
-[3:12] <LBrace, {>
+[3:12] <Keyword, LBrace {>
 [4:5] <Ident, A>
 [5:5] <Ident, B>
 [6:5] <Ident, C>
 [7:5] <Ident, F>
-[8:1] <RBrace, }>
+[8:1] <Keyword, RBrace }>
 [10:1] <Keyword, i32>
 [10:5] <Ident, score>
-[10:10] <LParen, (>
+[10:10] <Keyword, LParen (>
 [10:11] <Ident, Grade>
 [10:17] <Ident, g>
-[10:18] <RParen, )>
-[10:20] <LBrace, {>
+[10:18] <Keyword, RParen )>
+[10:20] <Keyword, LBrace {>
 [11:5] <Keyword, match>
 [11:11] <Ident, g>
-[11:13] <LBrace, {>
+[11:13] <Keyword, LBrace {>
 [12:9] <Ident, A>
-[12:11] <LBrace, {>
+[12:11] <Keyword, LBrace {>
 [12:13] <Keyword, return>
-[12:20] <Number, 4>
-[12:22] <RBrace, }>
+[12:20] <Literal, 4>
+[12:22] <Keyword, RBrace }>
 [13:9] <Ident, B>
-[13:11] <LBrace, {>
+[13:11] <Keyword, LBrace {>
 [13:13] <Keyword, return>
-[13:20] <Number, 3>
-[13:22] <RBrace, }>
+[13:20] <Literal, 3>
+[13:22] <Keyword, RBrace }>
 [14:9] <Ident, C>
-[14:11] <LBrace, {>
+[14:11] <Keyword, LBrace {>
 [14:13] <Keyword, return>
-[14:20] <Number, 2>
-[14:22] <RBrace, }>
+[14:20] <Literal, 2>
+[14:22] <Keyword, RBrace }>
 [15:9] <Ident, F>
-[15:11] <LBrace, {>
+[15:11] <Keyword, LBrace {>
 [15:13] <Keyword, return>
-[15:20] <Number, 0>
-[15:22] <RBrace, }>
-[16:5] <RBrace, }>
-[17:1] <RBrace, }>
+[15:20] <Literal, 0>
+[15:22] <Keyword, RBrace }>
+[16:5] <Keyword, RBrace }>
+[17:1] <Keyword, RBrace }>
 [19:1] <Keyword, i32>
 [19:5] <Ident, main>
-[19:9] <LParen, (>
-[19:10] <RParen, )>
-[19:12] <LBrace, {>
+[19:9] <Keyword, LParen (>
+[19:10] <Keyword, RParen )>
+[19:12] <Keyword, LBrace {>
 [20:5] <Keyword, i32>
 [20:9] <Ident, n>
-[20:11] <Assign, =>
-[20:13] <Number, 0>
+[20:11] <Keyword, Assign =>
+[20:13] <Literal, 0>
 [21:5] <Keyword, i32>
 [21:9] <Ident, sum_odd>
-[21:17] <Assign, =>
-[21:19] <Number, 0>
+[21:17] <Keyword, Assign =>
+[21:19] <Literal, 0>
 [23:5] <Keyword, loop>
-[23:10] <LBrace, {>
+[23:10] <Keyword, LBrace {>
 [24:9] <Keyword, if>
 [24:12] <Ident, n>
-[24:14] <GreaterEqual, >=>
-[24:17] <Number, 10>
-[24:20] <LBrace, {>
+[24:14] <Keyword, GreaterEqual >=>
+[24:17] <Literal, 10>
+[24:20] <Keyword, LBrace {>
 [25:13] <Keyword, break>
-[26:9] <RBrace, }>
+[26:9] <Keyword, RBrace }>
 [26:11] <Keyword, else>
-[26:16] <LBrace, {>
+[26:16] <Keyword, LBrace {>
 [27:13] <Ident, n>
-[27:15] <PlusAssign, +=>
-[27:18] <Number, 1>
-[28:9] <RBrace, }>
+[27:15] <Keyword, PlusAssign +=>
+[27:18] <Literal, 1>
+[28:9] <Keyword, RBrace }>
 [29:9] <Keyword, if>
 [29:12] <Ident, n>
-[29:14] <Percent, %>
-[29:16] <Number, 2>
-[29:18] <Equal, ==>
-[29:21] <Number, 0>
-[29:23] <LBrace, {>
+[29:14] <Keyword, Percent %>
+[29:16] <Literal, 2>
+[29:18] <Keyword, Equal ==>
+[29:21] <Literal, 0>
+[29:23] <Keyword, LBrace {>
 [30:13] <Keyword, continue>
-[31:9] <RBrace, }>
+[31:9] <Keyword, RBrace }>
 [32:9] <Ident, sum_odd>
-[32:17] <PlusAssign, +=>
+[32:17] <Keyword, PlusAssign +=>
 [32:20] <Ident, n>
-[33:5] <RBrace, }>
+[33:5] <Keyword, RBrace }>
 [35:5] <Keyword, i32>
 [35:9] <Ident, k>
-[35:11] <Assign, =>
-[35:13] <Number, 1>
+[35:11] <Keyword, Assign =>
+[35:13] <Literal, 1>
 [36:5] <Keyword, i32>
 [36:9] <Ident, sum_all>
-[36:17] <Assign, =>
-[36:19] <Number, 0>
+[36:17] <Keyword, Assign =>
+[36:19] <Literal, 0>
 [37:5] <Keyword, while>
 [37:11] <Ident, k>
-[37:13] <LessEqual, <=>
-[37:16] <Number, 5>
-[37:18] <LBrace, {>
+[37:13] <Keyword, LessEqual <=>
+[37:16] <Literal, 5>
+[37:18] <Keyword, LBrace {>
 [38:9] <Ident, sum_all>
-[38:17] <PlusAssign, +=>
+[38:17] <Keyword, PlusAssign +=>
 [38:20] <Ident, k>
 [39:9] <Ident, k>
-[39:11] <PlusAssign, +=>
-[39:14] <Number, 1>
-[40:5] <RBrace, }>
+[39:11] <Keyword, PlusAssign +=>
+[39:14] <Literal, 1>
+[40:5] <Keyword, RBrace }>
 [42:5] <Keyword, i32>
 [42:9] <Ident, sum_for>
-[42:17] <Assign, =>
-[42:19] <Number, 0>
+[42:17] <Keyword, Assign =>
+[42:19] <Literal, 0>
 [43:5] <Keyword, for>
 [43:9] <Keyword, i32>
 [43:13] <Ident, i>
-[43:15] <Assign, =>
-[43:17] <Number, 1>
-[43:18] <Semi, ;>
+[43:15] <Keyword, Assign =>
+[43:17] <Literal, 1>
+[43:18] <Keyword, Semicolon ;>
 [43:20] <Ident, i>
-[43:22] <LessEqual, <=>
-[43:25] <Number, 5>
-[43:26] <Semi, ;>
+[43:22] <Keyword, LessEqual <=>
+[43:25] <Literal, 5>
+[43:26] <Keyword, Semicolon ;>
 [43:28] <Ident, i>
-[43:30] <PlusAssign, +=>
-[43:33] <Number, 1>
-[43:35] <LBrace, {>
+[43:30] <Keyword, PlusAssign +=>
+[43:33] <Literal, 1>
+[43:35] <Keyword, LBrace {>
 [44:9] <Ident, sum_for>
-[44:17] <PlusAssign, +=>
+[44:17] <Keyword, PlusAssign +=>
 [44:20] <Ident, i>
-[45:5] <RBrace, }>
+[45:5] <Keyword, RBrace }>
 [47:5] <Ident, Grade>
 [47:11] <Ident, g>
-[47:13] <Assign, =>
+[47:13] <Keyword, Assign =>
 [47:15] <Ident, Grade>
-[47:20] <Dot, .>
+[47:20] <Keyword, Dot .>
 [47:21] <Ident, B>
 [48:5] <Keyword, i32>
 [48:9] <Ident, s>
-[48:11] <Assign, =>
+[48:11] <Keyword, Assign =>
 [48:13] <Ident, score>
-[48:18] <LParen, (>
+[48:18] <Keyword, LParen (>
 [48:19] <Ident, g>
-[48:20] <RParen, )>
+[48:20] <Keyword, RParen )>
 [50:5] <Keyword, return>
-[50:12] <Number, 0>
-[51:1] <RBrace, }>
-[52:1] <EOF, >
+[50:12] <Literal, 0>
+[51:1] <Keyword, RBrace }>
+[52:1] <EOF>

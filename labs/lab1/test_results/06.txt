@@ -1,168 +1,168 @@
 === Lexer Output ===
 [3:1] <Keyword, i32>
 [3:5] <Ident, main>
-[3:9] <LParen, (>
-[3:10] <RParen, )>
-[3:12] <LBrace, {>
+[3:9] <Keyword, LParen (>
+[3:10] <Keyword, RParen )>
+[3:12] <Keyword, LBrace {>
 [4:5] <Keyword, i32>
-[4:8] <LBracket, [>
-[4:9] <Number, 6>
-[4:10] <RBracket, ]>
+[4:8] <Keyword, LBracket [>
+[4:9] <Literal, 6>
+[4:10] <Keyword, RBracket ]>
 [4:12] <Ident, arr>
-[4:16] <Assign, =>
-[4:18] <LBracket, [>
-[4:19] <Number, 1>
-[4:20] <Comma, ,>
-[4:22] <Number, 2>
-[4:23] <Comma, ,>
-[4:25] <Number, 3>
-[4:26] <Comma, ,>
-[4:28] <Number, 4>
-[4:29] <Comma, ,>
-[4:31] <Number, 5>
-[4:32] <Comma, ,>
-[4:34] <Number, 6>
-[4:35] <RBracket, ]>
+[4:16] <Keyword, Assign =>
+[4:18] <Keyword, LBracket [>
+[4:19] <Literal, 1>
+[4:20] <Keyword, Comma ,>
+[4:22] <Literal, 2>
+[4:23] <Keyword, Comma ,>
+[4:25] <Literal, 3>
+[4:26] <Keyword, Comma ,>
+[4:28] <Literal, 4>
+[4:29] <Keyword, Comma ,>
+[4:31] <Literal, 5>
+[4:32] <Keyword, Comma ,>
+[4:34] <Literal, 6>
+[4:35] <Keyword, RBracket ]>
 [5:5] <Keyword, i32>
 [5:9] <Ident, s1>
-[5:12] <Assign, =>
+[5:12] <Keyword, Assign =>
 [5:14] <Ident, arr>
-[5:17] <LBracket, [>
-[5:18] <Number, 0>
-[5:19] <RBracket, ]>
-[5:21] <Plus, +>
+[5:17] <Keyword, LBracket [>
+[5:18] <Literal, 0>
+[5:19] <Keyword, RBracket ]>
+[5:21] <Keyword, Plus +>
 [5:23] <Ident, arr>
-[5:26] <LBracket, [>
-[5:27] <Number, 5>
-[5:28] <RBracket, ]>
+[5:26] <Keyword, LBracket [>
+[5:27] <Literal, 5>
+[5:28] <Keyword, RBracket ]>
 [6:5] <Keyword, for>
 [6:9] <Keyword, i32>
 [6:13] <Ident, i>
-[6:15] <Assign, =>
-[6:17] <Number, 1>
-[6:18] <Semi, ;>
+[6:15] <Keyword, Assign =>
+[6:17] <Literal, 1>
+[6:18] <Keyword, Semicolon ;>
 [6:20] <Ident, i>
-[6:22] <Less, <>
-[6:24] <Number, 5>
-[6:25] <Semi, ;>
+[6:22] <Keyword, Less <>
+[6:24] <Literal, 5>
+[6:25] <Keyword, Semicolon ;>
 [6:27] <Ident, i>
-[6:29] <PlusAssign, +=>
-[6:32] <Number, 1>
-[6:34] <LBrace, {>
+[6:29] <Keyword, PlusAssign +=>
+[6:32] <Literal, 1>
+[6:34] <Keyword, LBrace {>
 [7:9] <Ident, s1>
-[7:12] <PlusAssign, +=>
+[7:12] <Keyword, PlusAssign +=>
 [7:15] <Ident, arr>
-[7:18] <LBracket, [>
+[7:18] <Keyword, LBracket [>
 [7:19] <Ident, i>
-[7:20] <RBracket, ]>
-[8:5] <RBrace, }>
+[7:20] <Keyword, RBracket ]>
+[8:5] <Keyword, RBrace }>
 [10:5] <Keyword, i32>
 [10:9] <Ident, var>
-[10:13] <Assign, =>
-[10:15] <Number, 42>
+[10:13] <Keyword, Assign =>
+[10:15] <Literal, 42>
 [11:5] <Keyword, i32>
-[11:8] <Star, *>
+[11:8] <Keyword, Star *>
 [11:10] <Ident, p>
-[11:12] <Assign, =>
-[11:14] <Ampersand, &>
+[11:12] <Keyword, Assign =>
+[11:14] <Keyword, Ampersand &>
 [11:15] <Ident, var>
 [12:5] <Keyword, i32>
 [12:9] <Ident, s2>
-[12:12] <Assign, =>
-[12:14] <Star, *>
+[12:12] <Keyword, Assign =>
+[12:14] <Keyword, Star *>
 [12:15] <Ident, p>
-[12:17] <Plus, +>
-[12:19] <Number, 1>
-[13:5] <Star, *>
+[12:17] <Keyword, Plus +>
+[12:19] <Literal, 1>
+[13:5] <Keyword, Star *>
 [13:6] <Ident, p>
-[13:8] <PlusAssign, +=>
-[13:11] <Number, 1>
+[13:8] <Keyword, PlusAssign +=>
+[13:11] <Literal, 1>
 [15:5] <Keyword, i32>
-[15:8] <Star, *>
+[15:8] <Keyword, Star *>
 [15:10] <Ident, begin>
-[15:16] <Assign, =>
-[15:18] <Ampersand, &>
+[15:16] <Keyword, Assign =>
+[15:18] <Keyword, Ampersand &>
 [15:19] <Ident, arr>
-[15:22] <LBracket, [>
-[15:23] <Number, 0>
-[15:24] <RBracket, ]>
+[15:22] <Keyword, LBracket [>
+[15:23] <Literal, 0>
+[15:24] <Keyword, RBracket ]>
 [16:5] <Keyword, i32>
-[16:8] <Star, *>
+[16:8] <Keyword, Star *>
 [16:10] <Ident, end>
-[16:14] <Assign, =>
-[16:16] <Ampersand, &>
+[16:14] <Keyword, Assign =>
+[16:16] <Keyword, Ampersand &>
 [16:17] <Ident, arr>
-[16:20] <LBracket, [>
-[16:21] <Number, 5>
-[16:22] <RBracket, ]>
-[16:24] <Plus, +>
-[16:26] <Number, 1>
+[16:20] <Keyword, LBracket [>
+[16:21] <Literal, 5>
+[16:22] <Keyword, RBracket ]>
+[16:24] <Keyword, Plus +>
+[16:26] <Literal, 1>
 [17:5] <Keyword, i32>
 [17:9] <Ident, s3>
-[17:12] <Assign, =>
-[17:14] <Number, 0>
+[17:12] <Keyword, Assign =>
+[17:14] <Literal, 0>
 [18:5] <Keyword, for>
 [18:9] <Keyword, i32>
-[18:12] <Star, *>
+[18:12] <Keyword, Star *>
 [18:14] <Ident, p>
-[18:16] <Assign, =>
+[18:16] <Keyword, Assign =>
 [18:18] <Ident, begin>
-[18:23] <Semi, ;>
+[18:23] <Keyword, Semicolon ;>
 [18:25] <Ident, p>
-[18:27] <Less, <>
+[18:27] <Keyword, Less <>
 [18:29] <Ident, end>
-[18:32] <Semi, ;>
+[18:32] <Keyword, Semicolon ;>
 [18:34] <Ident, p>
-[18:36] <PlusAssign, +=>
-[18:39] <Number, 1>
-[18:41] <LBrace, {>
+[18:36] <Keyword, PlusAssign +=>
+[18:39] <Literal, 1>
+[18:41] <Keyword, LBrace {>
 [19:9] <Ident, s3>
-[19:12] <PlusAssign, +=>
-[19:15] <Star, *>
+[19:12] <Keyword, PlusAssign +=>
+[19:15] <Keyword, Star *>
 [19:16] <Ident, p>
-[20:5] <RBrace, }>
+[20:5] <Keyword, RBrace }>
 [22:5] <Keyword, i32>
-[22:8] <Star, *>
+[22:8] <Keyword, Star *>
 [22:10] <Ident, heap_obj1>
-[22:20] <Assign, =>
+[22:20] <Keyword, Assign =>
 [22:22] <Keyword, dyn>
 [22:26] <Keyword, i32>
 [23:5] <Keyword, i32>
-[23:8] <Star, *>
+[23:8] <Keyword, Star *>
 [23:10] <Ident, heap_obj2>
-[23:20] <Assign, =>
+[23:20] <Keyword, Assign =>
 [23:22] <Keyword, dyn>
 [23:26] <Keyword, i32>
-[23:29] <LBracket, [>
-[23:30] <Number, 3>
-[23:31] <RBracket, ]>
-[24:5] <Star, *>
+[23:29] <Keyword, LBracket [>
+[23:30] <Literal, 3>
+[23:31] <Keyword, RBracket ]>
+[24:5] <Keyword, Star *>
 [24:6] <Ident, heap_obj1>
-[24:16] <Assign, =>
-[24:18] <Number, 100>
+[24:16] <Keyword, Assign =>
+[24:18] <Literal, 100>
 [25:5] <Ident, heap_obj2>
-[25:14] <LBracket, [>
-[25:15] <Number, 0>
-[25:16] <RBracket, ]>
-[25:18] <Assign, =>
-[25:20] <Number, 10>
+[25:14] <Keyword, LBracket [>
+[25:15] <Literal, 0>
+[25:16] <Keyword, RBracket ]>
+[25:18] <Keyword, Assign =>
+[25:20] <Literal, 10>
 [26:5] <Ident, heap_obj2>
-[26:14] <LBracket, [>
-[26:15] <Number, 1>
-[26:16] <RBracket, ]>
-[26:18] <Assign, =>
-[26:20] <Number, 20>
+[26:14] <Keyword, LBracket [>
+[26:15] <Literal, 1>
+[26:16] <Keyword, RBracket ]>
+[26:18] <Keyword, Assign =>
+[26:20] <Literal, 20>
 [27:5] <Ident, heap_obj2>
-[27:14] <LBracket, [>
-[27:15] <Number, 2>
-[27:16] <RBracket, ]>
-[27:18] <Assign, =>
-[27:20] <Number, 30>
+[27:14] <Keyword, LBracket [>
+[27:15] <Literal, 2>
+[27:16] <Keyword, RBracket ]>
+[27:18] <Keyword, Assign =>
+[27:20] <Literal, 30>
 [29:5] <Keyword, del>
 [29:9] <Ident, heap_obj1>
 [30:5] <Keyword, del>
 [30:9] <Ident, heap_obj2>
 [32:5] <Keyword, return>
-[32:12] <Number, 0>
-[33:1] <RBrace, }>
-[34:1] <EOF, >
+[32:12] <Literal, 0>
+[33:1] <Keyword, RBrace }>
+[34:1] <EOF>

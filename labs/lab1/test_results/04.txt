@@ -1,194 +1,194 @@
 === Lexer Output ===
 [3:1] <Keyword, i32>
 [3:5] <Ident, main>
-[3:9] <LParen, (>
-[3:10] <RParen, )>
-[3:12] <LBrace, {>
+[3:9] <Keyword, LParen (>
+[3:10] <Keyword, RParen )>
+[3:12] <Keyword, LBrace {>
 [4:5] <Keyword, i32>
 [4:9] <Ident, a>
-[4:11] <Assign, =>
-[4:13] <Number, 8>
-[4:15] <Plus, +>
-[4:17] <Number, 5>
-[4:19] <Star, *>
-[4:21] <Number, 2>
-[4:23] <Minus, ->
-[4:25] <Number, 3>
+[4:11] <Keyword, Assign =>
+[4:13] <Literal, 8>
+[4:15] <Keyword, Plus +>
+[4:17] <Literal, 5>
+[4:19] <Keyword, Star *>
+[4:21] <Literal, 2>
+[4:23] <Keyword, Minus ->
+[4:25] <Literal, 3>
 [5:5] <Keyword, i32>
 [5:9] <Ident, b>
-[5:11] <Assign, =>
-[5:13] <LParen, (>
-[5:14] <Number, 8>
-[5:16] <Plus, +>
-[5:18] <Number, 5>
-[5:19] <RParen, )>
-[5:21] <Star, *>
-[5:23] <LParen, (>
-[5:24] <Number, 2>
-[5:26] <Minus, ->
-[5:28] <Number, 3>
-[5:29] <RParen, )>
+[5:11] <Keyword, Assign =>
+[5:13] <Keyword, LParen (>
+[5:14] <Literal, 8>
+[5:16] <Keyword, Plus +>
+[5:18] <Literal, 5>
+[5:19] <Keyword, RParen )>
+[5:21] <Keyword, Star *>
+[5:23] <Keyword, LParen (>
+[5:24] <Literal, 2>
+[5:26] <Keyword, Minus ->
+[5:28] <Literal, 3>
+[5:29] <Keyword, RParen )>
 [7:5] <Keyword, i32>
 [7:9] <Ident, res1>
 [8:5] <Ident, res1>
-[8:10] <Assign, =>
-[8:12] <Minus, ->
+[8:10] <Keyword, Assign =>
+[8:12] <Keyword, Minus ->
 [8:13] <Ident, a>
 [9:5] <Ident, res1>
-[9:10] <Assign, =>
+[9:10] <Keyword, Assign =>
 [9:12] <Ident, a>
-[9:14] <Plus, +>
+[9:14] <Keyword, Plus +>
 [9:16] <Ident, b>
 [10:5] <Ident, res1>
-[10:10] <Assign, =>
+[10:10] <Keyword, Assign =>
 [10:12] <Ident, a>
-[10:14] <Minus, ->
+[10:14] <Keyword, Minus ->
 [10:16] <Ident, b>
 [11:5] <Ident, res1>
-[11:10] <Assign, =>
+[11:10] <Keyword, Assign =>
 [11:12] <Ident, a>
-[11:14] <Star, *>
+[11:14] <Keyword, Star *>
 [11:16] <Ident, b>
 [12:5] <Ident, res1>
-[12:10] <Assign, =>
+[12:10] <Keyword, Assign =>
 [12:12] <Ident, a>
-[12:14] <Slash, />
+[12:14] <Keyword, Slash />
 [12:16] <Ident, b>
 [13:5] <Ident, res1>
-[13:10] <Assign, =>
+[13:10] <Keyword, Assign =>
 [13:12] <Ident, a>
-[13:14] <Percent, %>
+[13:14] <Keyword, Percent %>
 [13:16] <Ident, b>
 [14:5] <Ident, res1>
-[14:10] <PlusAssign, +=>
+[14:10] <Keyword, PlusAssign +=>
 [14:13] <Ident, b>
 [15:5] <Ident, res1>
-[15:10] <MinusAssign, -=>
+[15:10] <Keyword, MinusAssign -=>
 [15:13] <Ident, b>
 [16:5] <Ident, res1>
-[16:10] <StarAssign, *=>
+[16:10] <Keyword, StarAssign *=>
 [16:13] <Ident, b>
 [17:5] <Ident, res1>
-[17:10] <SlashAssign, /=>
+[17:10] <Keyword, SlashAssign /=>
 [17:13] <Ident, b>
 [18:5] <Ident, res1>
-[18:10] <PercentAssign, %=>
+[18:10] <Keyword, PercentAssign %=>
 [18:13] <Ident, b>
 [20:5] <Keyword, bool>
 [20:10] <Ident, res2>
 [21:5] <Ident, res2>
-[21:10] <Assign, =>
+[21:10] <Keyword, Assign =>
 [21:12] <Ident, a>
-[21:14] <Equal, ==>
+[21:14] <Keyword, Equal ==>
 [21:17] <Ident, b>
 [22:5] <Ident, res2>
-[22:10] <Assign, =>
+[22:10] <Keyword, Assign =>
 [22:12] <Ident, a>
-[22:14] <NotEqual, !=>
+[22:14] <Keyword, NotEqual !=>
 [22:17] <Ident, b>
 [23:5] <Ident, res2>
-[23:10] <Assign, =>
+[23:10] <Keyword, Assign =>
 [23:12] <Ident, a>
-[23:14] <Less, <>
+[23:14] <Keyword, Less <>
 [23:16] <Ident, b>
 [24:5] <Ident, res2>
-[24:10] <Assign, =>
+[24:10] <Keyword, Assign =>
 [24:12] <Ident, a>
-[24:14] <LessEqual, <=>
+[24:14] <Keyword, LessEqual <=>
 [24:17] <Ident, b>
 [25:5] <Ident, res2>
-[25:10] <Assign, =>
+[25:10] <Keyword, Assign =>
 [25:12] <Ident, a>
-[25:14] <Greater, >>
+[25:14] <Keyword, Greater >>
 [25:16] <Ident, b>
 [26:5] <Ident, res2>
-[26:10] <Assign, =>
+[26:10] <Keyword, Assign =>
 [26:12] <Ident, a>
-[26:14] <GreaterEqual, >=>
+[26:14] <Keyword, GreaterEqual >=>
 [26:17] <Ident, b>
 [28:5] <Keyword, bool>
 [28:10] <Ident, res3>
 [29:5] <Ident, res3>
-[29:10] <Assign, =>
-[29:12] <LParen, (>
+[29:10] <Keyword, Assign =>
+[29:12] <Keyword, LParen (>
 [29:13] <Ident, a>
-[29:15] <Greater, >>
+[29:15] <Keyword, Greater >>
 [29:17] <Ident, b>
-[29:18] <RParen, )>
+[29:18] <Keyword, RParen )>
 [29:20] <Keyword, and>
-[29:24] <LParen, (>
+[29:24] <Keyword, LParen (>
 [29:25] <Ident, b>
-[29:27] <Greater, >>
-[29:29] <Number, 0>
-[29:30] <RParen, )>
+[29:27] <Keyword, Greater >>
+[29:29] <Literal, 0>
+[29:30] <Keyword, RParen )>
 [30:5] <Ident, res3>
-[30:10] <Assign, =>
-[30:12] <LParen, (>
+[30:10] <Keyword, Assign =>
+[30:12] <Keyword, LParen (>
 [30:13] <Ident, a>
-[30:15] <Greater, >>
+[30:15] <Keyword, Greater >>
 [30:17] <Ident, b>
-[30:18] <RParen, )>
+[30:18] <Keyword, RParen )>
 [30:20] <Keyword, or>
-[30:23] <LParen, (>
+[30:23] <Keyword, LParen (>
 [30:24] <Ident, b>
-[30:26] <Greater, >>
-[30:28] <Number, 0>
-[30:29] <RParen, )>
+[30:26] <Keyword, Greater >>
+[30:28] <Literal, 0>
+[30:29] <Keyword, RParen )>
 [31:5] <Ident, res3>
-[31:10] <Assign, =>
+[31:10] <Keyword, Assign =>
 [31:12] <Keyword, not>
-[31:16] <LParen, (>
+[31:16] <Keyword, LParen (>
 [31:17] <Ident, a>
-[31:19] <Greater, >>
+[31:19] <Keyword, Greater >>
 [31:21] <Ident, b>
-[31:22] <RParen, )>
+[31:22] <Keyword, RParen )>
 [33:5] <Keyword, i32>
 [33:9] <Ident, res4>
 [34:5] <Ident, res4>
-[34:10] <Assign, =>
+[34:10] <Keyword, Assign =>
 [34:12] <Ident, a>
-[34:14] <Ampersand, &>
+[34:14] <Keyword, Ampersand &>
 [34:16] <Ident, b>
 [35:5] <Ident, res4>
-[35:10] <Assign, =>
+[35:10] <Keyword, Assign =>
 [35:12] <Ident, a>
-[35:14] <Pipe, |>
+[35:14] <Keyword, Pipe |>
 [35:16] <Ident, b>
 [36:5] <Ident, res4>
-[36:10] <Assign, =>
+[36:10] <Keyword, Assign =>
 [36:12] <Ident, a>
-[36:14] <Caret, ^>
+[36:14] <Keyword, Caret ^>
 [36:16] <Ident, b>
 [37:5] <Ident, res4>
-[37:10] <Assign, =>
-[37:12] <Tilde, ~>
+[37:10] <Keyword, Assign =>
+[37:12] <Keyword, Tilde ~>
 [37:13] <Ident, a>
 [38:5] <Ident, res4>
-[38:10] <Assign, =>
+[38:10] <Keyword, Assign =>
 [38:12] <Ident, a>
-[38:14] <ShiftLeft, <<>
-[38:17] <Number, 2>
+[38:14] <Keyword, ShiftLeft <<>
+[38:17] <Literal, 2>
 [39:5] <Ident, res4>
-[39:10] <Assign, =>
+[39:10] <Keyword, Assign =>
 [39:12] <Ident, a>
-[39:14] <ShiftRight, >>>
-[39:17] <Number, 2>
+[39:14] <Keyword, ShiftRight >>>
+[39:17] <Literal, 2>
 [40:5] <Ident, res4>
-[40:10] <AmpersandAssign, &=>
+[40:10] <Keyword, AmpersandAssign &=>
 [40:13] <Ident, b>
 [41:5] <Ident, res4>
-[41:10] <PipeAssign, |=>
+[41:10] <Keyword, PipeAssign |=>
 [41:13] <Ident, b>
 [42:5] <Ident, res4>
-[42:10] <CaretAssign, ^=>
+[42:10] <Keyword, CaretAssign ^=>
 [42:13] <Ident, b>
 [43:5] <Ident, res4>
-[43:10] <ShiftLeftAssign, <<=>
-[43:14] <Number, 2>
+[43:10] <Keyword, ShiftLeftAssign <<=>
+[43:14] <Literal, 2>
 [44:5] <Ident, res4>
-[44:10] <ShiftRightAssign, >>=>
-[44:14] <Number, 2>
+[44:10] <Keyword, ShiftRightAssign >>=>
+[44:14] <Literal, 2>
 [46:5] <Keyword, return>
-[46:12] <Number, 0>
-[47:1] <RBrace, }>
-[48:1] <EOF, >
+[46:12] <Literal, 0>
+[47:1] <Keyword, RBrace }>
+[48:1] <EOF>

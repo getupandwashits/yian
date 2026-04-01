@@ -1,70 +1,70 @@
 === Lexer Output ===
 [3:1] <Keyword, i32>
 [3:5] <Ident, factorial>
-[3:14] <LParen, (>
+[3:14] <Keyword, LParen (>
 [3:15] <Keyword, i32>
 [3:19] <Ident, n>
-[3:20] <RParen, )>
-[3:22] <LBrace, {>
+[3:20] <Keyword, RParen )>
+[3:22] <Keyword, LBrace {>
 [4:5] <Keyword, if>
 [4:8] <Ident, n>
-[4:10] <LessEqual, <=>
-[4:13] <Number, 1>
-[4:15] <LBrace, {>
+[4:10] <Keyword, LessEqual <=>
+[4:13] <Literal, 1>
+[4:15] <Keyword, LBrace {>
 [5:9] <Keyword, return>
-[5:16] <Number, 1>
-[6:5] <RBrace, }>
+[5:16] <Literal, 1>
+[6:5] <Keyword, RBrace }>
 [7:5] <Keyword, return>
 [7:12] <Ident, n>
-[7:14] <Star, *>
+[7:14] <Keyword, Star *>
 [7:16] <Ident, factorial>
-[7:25] <LParen, (>
+[7:25] <Keyword, LParen (>
 [7:26] <Ident, n>
-[7:28] <Minus, ->
-[7:30] <Number, 1>
-[7:31] <RParen, )>
-[8:1] <RBrace, }>
+[7:28] <Keyword, Minus ->
+[7:30] <Literal, 1>
+[7:31] <Keyword, RParen )>
+[8:1] <Keyword, RBrace }>
 [10:1] <Keyword, bool>
 [10:6] <Ident, is_odd>
-[10:12] <LParen, (>
+[10:12] <Keyword, LParen (>
 [10:13] <Keyword, i32>
 [10:17] <Ident, n>
-[10:18] <RParen, )>
-[10:20] <LBrace, {>
+[10:18] <Keyword, RParen )>
+[10:20] <Keyword, LBrace {>
 [11:5] <Keyword, return>
 [11:12] <Ident, n>
-[11:14] <Percent, %>
-[11:16] <Number, 2>
-[11:18] <Equal, ==>
-[11:21] <Number, 1>
-[12:1] <RBrace, }>
+[11:14] <Keyword, Percent %>
+[11:16] <Literal, 2>
+[11:18] <Keyword, Equal ==>
+[11:21] <Literal, 1>
+[12:1] <Keyword, RBrace }>
 [14:1] <Keyword, i32>
 [14:5] <Ident, main>
-[14:9] <LParen, (>
-[14:10] <RParen, )>
-[14:12] <LBrace, {>
+[14:9] <Keyword, LParen (>
+[14:10] <Keyword, RParen )>
+[14:12] <Keyword, LBrace {>
 [15:5] <Keyword, i32>
 [15:9] <Ident, f>
-[15:11] <Assign, =>
+[15:11] <Keyword, Assign =>
 [15:13] <Ident, factorial>
-[15:22] <LParen, (>
-[15:23] <Number, 6>
-[15:24] <RParen, )>
+[15:22] <Keyword, LParen (>
+[15:23] <Literal, 6>
+[15:24] <Keyword, RParen )>
 [16:5] <Keyword, bool>
 [16:10] <Ident, odd>
-[16:14] <Assign, =>
+[16:14] <Keyword, Assign =>
 [16:16] <Ident, is_odd>
-[16:22] <LParen, (>
-[16:23] <Number, 9>
-[16:24] <RParen, )>
+[16:22] <Keyword, LParen (>
+[16:23] <Literal, 9>
+[16:24] <Keyword, RParen )>
 [17:5] <Keyword, bool>
 [17:10] <Ident, even>
-[17:15] <Assign, =>
+[17:15] <Keyword, Assign =>
 [17:17] <Ident, is_odd>
-[17:23] <LParen, (>
-[17:24] <Number, 8>
-[17:25] <RParen, )>
+[17:23] <Keyword, LParen (>
+[17:24] <Literal, 8>
+[17:25] <Keyword, RParen )>
 [19:5] <Keyword, return>
-[19:12] <Number, 0>
-[20:1] <RBrace, }>
-[21:1] <EOF, >
+[19:12] <Literal, 0>
+[20:1] <Keyword, RBrace }>
+[21:1] <EOF>

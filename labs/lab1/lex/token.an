@@ -1,0 +1,307 @@
+from std.core.string import String
+from std.core.fmt import ToString
+from std.core.option import Option
+
+pub enum Keyword {
+    // ================ 关键字 ================
+    // 数据类型
+    U8, U16, U32, U64,
+    I8, I16, I32, I64,
+    F32, F64,
+    Char, Bool, Str, Void,
+    Struct, Enum,
+    // 控制流
+    If, Else, While, For, Loop, Match, Break, Continue, Return,
+    // 逻辑运算
+    And, Or, Not,
+    // 布尔字面量
+    True, False,
+    // 内存管理
+    Dyn, Del,
+    // ================ 符号 ================
+    // 括号 (, ), {, }, [, ]
+    LParen, RParen, LBrace, RBrace, LBracket, RBracket,
+    // 分隔符 ;, ,
+    Semicolon, Comma,
+    // 算术运算 +, -, *, /, %
+    Plus, Minus, Star, Slash, Percent,
+    // 比较运算 ==, !=, <, <=, >, >=
+    Equal, NotEqual, Less, LessEqual, Greater, GreaterEqual,
+    // 位运算 &, |, ^, ~, <<, >>
+    Ampersand, Pipe, Caret, Tilde, ShiftLeft, ShiftRight,
+    // 成员访问 .
+    Dot,
+    // 赋值 =
+    Assign,
+    // 复合赋值 +=, -=, *=, /=, %=, &=, |=, ^=, <<=, >>=
+    PlusAssign, MinusAssign, StarAssign, SlashAssign, PercentAssign,
+    AmpersandAssign, PipeAssign, CaretAssign, ShiftLeftAssign, ShiftRightAssign
+}
+
+impl Keyword {
+    static pub Option<Keyword> from_word(str text) {
+        if text == "i8" { return Option<Keyword>.Some(Keyword.I8) }
+        elif text == "i16" { return Option<Keyword>.Some(Keyword.I16) }
+        elif text == "i32" { return Option<Keyword>.Some(Keyword.I32) }
+        elif text == "i64" { return Option<Keyword>.Some(Keyword.I64) }
+        elif text == "u8" { return Option<Keyword>.Some(Keyword.U8) }
+        elif text == "u16" { return Option<Keyword>.Some(Keyword.U16) }
+        elif text == "u32" { return Option<Keyword>.Some(Keyword.U32) }
+        elif text == "u64" { return Option<Keyword>.Some(Keyword.U64) }
+        elif text == "f32" { return Option<Keyword>.Some(Keyword.F32) }
+        elif text == "f64" { return Option<Keyword>.Some(Keyword.F64) }
+        elif text == "char" { return Option<Keyword>.Some(Keyword.Char) }
+        elif text == "bool" { return Option<Keyword>.Some(Keyword.Bool) }
+        elif text == "str" { return Option<Keyword>.Some(Keyword.Str) }
+        elif text == "void" { return Option<Keyword>.Some(Keyword.Void) }
+        elif text == "struct" { return Option<Keyword>.Some(Keyword.Struct) }
+        elif text == "enum" { return Option<Keyword>.Some(Keyword.Enum) }
+        elif text == "if" { return Option<Keyword>.Some(Keyword.If) }
+        elif text == "else" { return Option<Keyword>.Some(Keyword.Else) }
+        elif text == "while" { return Option<Keyword>.Some(Keyword.While) }
+        elif text == "for" { return Option<Keyword>.Some(Keyword.For) }
+        elif text == "loop" { return Option<Keyword>.Some(Keyword.Loop) }
+        elif text == "match" { return Option<Keyword>.Some(Keyword.Match) }
+        elif text == "break" { return Option<Keyword>.Some(Keyword.Break) }
+        elif text == "continue" { return Option<Keyword>.Some(Keyword.Continue) }
+        elif text == "return" { return Option<Keyword>.Some(Keyword.Return) }
+        elif text == "and" { return Option<Keyword>.Some(Keyword.And) }
+        elif text == "or" { return Option<Keyword>.Some(Keyword.Or) }
+        elif text == "not" { return Option<Keyword>.Some(Keyword.Not) }
+        elif text == "true" { return Option<Keyword>.Some(Keyword.True) }
+        elif text == "false" { return Option<Keyword>.Some(Keyword.False) }
+        elif text == "dyn" { return Option<Keyword>.Some(Keyword.Dyn) }
+        elif text == "del" { return Option<Keyword>.Some(Keyword.Del) }
+        return Option<Keyword>.None
+    }
+
+    static pub Option<Keyword> from_symbol(str text) {
+        if text == "(" { return Option<Keyword>.Some(Keyword.LParen) }
+        elif text == ")" { return Option<Keyword>.Some(Keyword.RParen) }
+        elif text == "{" { return Option<Keyword>.Some(Keyword.LBrace) }
+        elif text == "}" { return Option<Keyword>.Some(Keyword.RBrace) }
+        elif text == "[" { return Option<Keyword>.Some(Keyword.LBracket) }
+        elif text == "]" { return Option<Keyword>.Some(Keyword.RBracket) }
+        elif text == ";" { return Option<Keyword>.Some(Keyword.Semicolon) }
+        elif text == "," { return Option<Keyword>.Some(Keyword.Comma) }
+        elif text == "+" { return Option<Keyword>.Some(Keyword.Plus) }
+        elif text == "-" { return Option<Keyword>.Some(Keyword.Minus) }
+        elif text == "*" { return Option<Keyword>.Some(Keyword.Star) }
+        elif text == "/" { return Option<Keyword>.Some(Keyword.Slash) }
+        elif text == "%" { return Option<Keyword>.Some(Keyword.Percent) }
+        elif text == "==" { return Option<Keyword>.Some(Keyword.Equal) }
+        elif text == "!=" { return Option<Keyword>.Some(Keyword.NotEqual) }
+        elif text == "<" { return Option<Keyword>.Some(Keyword.Less) }
+        elif text == "<=" { return Option<Keyword>.Some(Keyword.LessEqual) }
+        elif text == ">" { return Option<Keyword>.Some(Keyword.Greater) }
+        elif text == ">=" { return Option<Keyword>.Some(Keyword.GreaterEqual) }
+        elif text == "&" { return Option<Keyword>.Some(Keyword.Ampersand) }
+        elif text == "|" { return Option<Keyword>.Some(Keyword.Pipe) }
+        elif text == "^" { return Option<Keyword>.Some(Keyword.Caret) }
+        elif text == "~" { return Option<Keyword>.Some(Keyword.Tilde) }
+        elif text == "<<" { return Option<Keyword>.Some(Keyword.ShiftLeft) }
+        elif text == ">>" { return Option<Keyword>.Some(Keyword.ShiftRight) }
+        elif text == "." { return Option<Keyword>.Some(Keyword.Dot) }
+        elif text == "=" { return Option<Keyword>.Some(Keyword.Assign) }
+        elif text == "+=" { return Option<Keyword>.Some(Keyword.PlusAssign) }
+        elif text == "-=" { return Option<Keyword>.Some(Keyword.MinusAssign) }
+        elif text == "*=" { return Option<Keyword>.Some(Keyword.StarAssign) }
+        elif text == "/=" { return Option<Keyword>.Some(Keyword.SlashAssign) }
+        elif text == "%=" { return Option<Keyword>.Some(Keyword.PercentAssign) }
+        elif text == "&=" { return Option<Keyword>.Some(Keyword.AmpersandAssign) }
+        elif text == "|=" { return Option<Keyword>.Some(Keyword.PipeAssign) }
+        elif text == "^=" { return Option<Keyword>.Some(Keyword.CaretAssign) }
+        elif text == "<<=" { return Option<Keyword>.Some(Keyword.ShiftLeftAssign) }
+        elif text == ">>=" { return Option<Keyword>.Some(Keyword.ShiftRightAssign) }
+        return Option<Keyword>.None
+    }
+}
+
+impl ToString for Keyword {
+    pub String to_string() {
+        match *self {
+            // 关键字
+            U8 { return String.from("u8") }
+            U16 { return String.from("u16") }
+            U32 { return String.from("u32") }
+            U64 { return String.from("u64") }
+            I8 { return String.from("i8") }
+            I16 { return String.from("i16") }
+            I32 { return String.from("i32") }
+            I64 { return String.from("i64") }
+            F32 { return String.from("f32") }
+            F64 { return String.from("f64") }
+            Char { return String.from("char") }
+            Bool { return String.from("bool") }
+            Str { return String.from("str") }
+            Void { return String.from("void") }
+            Struct { return String.from("struct") }
+            Enum { return String.from("enum") }
+            If { return String.from("if") }
+            Else { return String.from("else") }
+            While { return String.from("while") }
+            For { return String.from("for") }
+            Loop { return String.from("loop") }
+            Match { return String.from("match") }
+            Break { return String.from("break") }
+            Continue { return String.from("continue") }
+            Return { return String.from("return") }
+            And { return String.from("and") }
+            Or { return String.from("or") }
+            Not { return String.from("not") }
+            True { return String.from("true") }
+            False { return String.from("false") }
+            Dyn { return String.from("dyn") }
+            Del { return String.from("del") }
+            // 符号
+            LParen { return String.from("LParen (") }
+            RParen { return String.from("RParen )") }
+            LBrace { return String.from("LBrace {") }
+            RBrace { return String.from("RBrace }") }
+            LBracket { return String.from("LBracket [") }
+            RBracket { return String.from("RBracket ]") }
+            Semicolon { return String.from("Semicolon ;") }
+            Comma { return String.from("Comma ,") }
+            Plus { return String.from("Plus +") }
+            Minus { return String.from("Minus -") }
+            Star { return String.from("Star *") }
+            Slash { return String.from("Slash /") }
+            Percent { return String.from("Percent %") }
+            Equal { return String.from("Equal ==") }
+            NotEqual { return String.from("NotEqual !=") }
+            Less { return String.from("Less <") }
+            LessEqual { return String.from("LessEqual <=") }
+            Greater { return String.from("Greater >") }
+            GreaterEqual { return String.from("GreaterEqual >=") }
+            Ampersand { return String.from("Ampersand &") }
+            Pipe { return String.from("Pipe |") }
+            Caret { return String.from("Caret ^") }
+            Tilde { return String.from("Tilde ~") }
+            ShiftLeft { return String.from("ShiftLeft <<") }
+            ShiftRight { return String.from("ShiftRight >>") }
+            Dot { return String.from("Dot .") }
+            Assign { return String.from("Assign =") }
+            PlusAssign { return String.from("PlusAssign +=") }
+            MinusAssign { return String.from("MinusAssign -=") }
+            StarAssign { return String.from("StarAssign *=") }
+            SlashAssign { return String.from("SlashAssign /=") }
+            PercentAssign { return String.from("PercentAssign %=") }
+            AmpersandAssign { return String.from("AmpersandAssign &=") }
+            PipeAssign { return String.from("PipeAssign |=") }
+            CaretAssign { return String.from("CaretAssign ^=") }
+            ShiftLeftAssign { return String.from("ShiftLeftAssign <<=") }
+            ShiftRightAssign { return String.from("ShiftRightAssign >>=") }
+        }
+    }
+}
+
+pub enum Literal {
+    // 十进制整数字面量
+    Int { u64 value }
+    // 十进制浮点字面量
+    Float { f64 value }
+    // 字符字面量原始文本 (如 'a' 或 '\n')
+    Char { String text }
+    // 字符串字面量原始文本 (不含双引号)
+    Str { String text }
+}
+
+impl Literal {
+    static pub Self from_number_text(str text) {
+        if text.contains_char('.') {
+            return Literal.Float(text.parse<f64>())
+        }
+        return Literal.Int(text.parse<u64>())
+    }
+
+    static pub Self from_char_text(str text) {
+        return Literal.Char(String.from(text))
+    }
+
+    static pub Self from_string_text(str text) {
+        return Literal.Str(String.from(text))
+    }
+}
+
+impl ToString for Literal {
+    pub String to_string() {
+        match *self {
+            Int as lit { return lit.value.to_string() }
+            Float as lit { return lit.value.to_string() }
+            Char as lit { return lit.text.clone() }
+            Str as lit { return lit.text.clone() }
+        }
+    }
+}
+
+pub enum TokenData {
+    // 关键字(如 if, else 等, 以及符号如 +, -, *, / 等)
+    Kw { Keyword kw }
+    // 标识符(如变量名, 函数名等)
+    Ident { String name }
+    // 字面量(如整数, 浮点数, 字符, 字符串等)
+    Lit { Literal lit }
+    // 未识别的输入
+    Unknown { String text }
+    // EOF
+    EOF
+}
+
+impl ToString for TokenData {
+    pub String to_string() {
+        String out = String.from("<")
+        match *self {
+            Kw as kw {
+                out += "Keyword, "
+                out += kw.kw.to_string()
+            }
+            Ident as id {
+                out += "Ident, "
+                out += id.name.clone()
+            }
+            Lit as lit {
+                out += "Literal, "
+                out += lit.lit.to_string()
+            }
+            Unknown as u {
+                out += "Unknown, "
+                out += u.text.clone()
+            }
+            EOF {
+                out += "EOF"
+            }
+        }
+        out += ">"
+        return out
+    }
+}
+
+pub struct Token {
+    // 词法单元的数据
+    TokenData data
+    // 词法单元在源代码中的位置 (行号和列号)
+    u64 line
+    u64 col
+}
+
+impl Token {
+    static pub Self new(TokenData data, u64 line, u64 col) {
+        return Self(
+            data = data,
+            line = line,
+            col = col
+        )
+    }
+}
+
+impl ToString for Token {
+    pub String to_string() {
+        String out = String.from("[")
+        out += self.line.to_string()
+        out += ":"
+        out += self.col.to_string()
+        out += "] "
+        out += self.data.to_string()
+        return out
+    }
+}

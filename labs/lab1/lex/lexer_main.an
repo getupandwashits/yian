@@ -1,26 +1,46 @@
 from std.core.io import read_file, write_file, print
-from std.collections.hash_set import HashSet
+from std.core.vec import Vec
 from std.core.string import String
-from lexer import gen_keyword_table, tokenize
-// =====================================================================
-// 主函数
-// =====================================================================
+
+from lexer import tokenize
+from token import Token
+
+// 辅助函数：将 token 列表写入文本文件
+write_tokens(str output_path, Vec<Token>* tokens) {
+	String out = String.new()
+    out += "=== Lexer Output ===\n"
+	for token in *tokens {
+		out += token.to_string()
+		out.push_str("\n")
+	}
+	write_file(output_path, out.as_str())
+}
+
 i32 main() {
-    HashSet<str> keyword_table = gen_keyword_table()
+    Vec<str> tests = Vec<str>.new()
+    tests.push("01")
+    tests.push("02")
+    tests.push("03")
+    tests.push("04")
+    tests.push("05")
+    tests.push("06")
+    tests.push("07")
+    tests.push("08")
+    tests.push("09")
+    tests.push("10")
 
-    str input_path  = "labs/lab1/test_cases/01.an"
-    str output_path = "labs/lab1/test_results/01.txt"
+	for test in tests {
+		str input_path = (String.from("labs/lab1/test_cases/") + test + ".an").as_str()
+		str output_path = (String.from("labs/lab1/output/") + test + ".txt").as_str()
 
-    str source = read_file(input_path)
+		str source = read_file(input_path)
+		Vec<Token> tokens = tokenize(source)
+		write_tokens(output_path, &tokens)
 
-    String out = String.new()
-    out.push_str("=== Lexer Output ===\n")
-    tokenize(&out, source, &keyword_table)
+		print("Lexer done. Output written to: ")
+		print(output_path)
+		print("\n")
+	}
 
-    write_file(output_path, out.as_str())
-    print("Lexer done. Output written to: ")
-    print(output_path)
-    print("\n")
-
-    return 0
+	return 0
 }
