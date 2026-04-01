@@ -55,10 +55,9 @@ scripts/yian_compiler.py labs/lab1/test_cases/hello.an
 
 核心流程如下：
 
-1. `main()` 读取测试输入文件。
-2. `tokenize(...)` 使用有限自动机扫描字符流。
-3. `append_token(...)` 将识别到的 Token 追加到输出缓冲区。
-4. 最终写入输出文件（`labs/lab1/test_results/xx.txt`）。
+1. `lexer_main.an::main()` 读取测试输入文件。
+2. `lexer.an::tokenize(...)` 使用有限自动机扫描字符流。
+4. 最终写入输出文件（`labs/lab1/output/xx.txt`）。
 
 ### 3.3 涉及的类型
 - `enum`：[Enum](../../../docs/grammar/02.type_system.md#enum)
@@ -69,34 +68,26 @@ scripts/yian_compiler.py labs/lab1/test_cases/hello.an
 
 ### 3.4 关键函数
 
-- `gen_keyword_table()`：构造关键字集合。
 - `emit_word(...)`：将单词分类为 `Keyword` 或 `Ident`。
 - `tokenize(...)`：状态机主循环，处理标识符、数字、字符串、字符、操作符、分隔符、注释与空白。
-- `append_token(...)`：统一的 Token 输出格式。
+- `push_token(...)`：统一的 Token 输出格式。
 
 ### 3.5 需要补全的 TODO
 
 你需要在模板中补全以下逻辑：
 
-1. 关键字表补全：在 `gen_keyword_table()` 中加入完整关键字。
-2. 单词类别判断：在 `emit_word(...)` 中根据关键字表输出 `Keyword` 或 `Ident`。
-3. 标识符结束时的收束：在 `InIdent` 状态中结束当前词并回到 `Start`。
-4. 行列号更新：在主循环末尾按字符推进 `line/col`，正确处理换行。
+1. 单词类别判断：在 `emit_word(...)` 中根据关键字表输出 `Keyword` 或 `Ident`。
+2. 部分状态结束时的收束：在部分状态中正确处理 Token 的结束。
+3. 行列号更新：在主循环末尾按字符推进 `line/col`，正确处理换行。
 
 ### 3.6 测试
 
-你可以通过下面两种方式测试你的词法分析器：
+你可以通过下面的方式测试你的词法分析器：
 
-1. 单文件测试  
-   修改 `labs/lab1/lex/lexer_main.an` 中的路径配置（第 11-12 行）：
-   - `input_path`：待测试输入文件，例如 `labs/lab1/test_cases/01.an`
-   - `output_path`：对应输出文件，例如 `labs/lab1/test_results/01.txt`
-
-   然后执行：
-   `./scripts/yian_compiler.py labs/lab1/lex/lexer.an labs/lab1/lex/lexer_main.an`
-
-2. 全部文件测试  
-   `./scripts/yian_compiler.py labs/lab1/lex/lexer.an labs/lab1/lex/lexer_checker.an`
+1. 修改 `labs/lab1/lex/lexer_main.an` 中所包含的测试名(你也可以构造自己的测试)
+2. 命令行执行: `scripts/yian_compiler.py labs/lab1/lex/lexer`
+3. 执行生成的可执行文件, 将会在 `labs/lab1/output/` 目录下生成对应的输出文件, 与 `labs/lab1/test_results/` 中的参考输出进行对比。
+4. 因为一些神秘小 BUG, 你需要自己创建 `labs/lab1/output/` 目录, 否则输出文件无法生成。
 
 ---
 
@@ -135,7 +126,7 @@ scripts/yian_compiler.py labs/lab1/test_cases/hello.an
 ### 5.1 公开测试
 
 - 输入：`labs/lab1/test_cases/01.an` ~ `labs/lab1/test_cases/06.an`
-- 参考：`labs/lab1/test_results/01.txt` ~ `labs/lab1/test_results/06.txt`
+- 参考答案：`labs/lab1/test_results/01.txt` ~ `labs/lab1/test_results/06.txt`
 
 ### 5.2 隐藏测试（用于评分）
 
