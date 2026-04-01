@@ -49,9 +49,7 @@
 [20:11] <Assign, =>
 [20:13] <Number, 0>
 [21:5] <Keyword, i32>
-[21:9] <Ident, sum>
-[21:12] <Underscore, _>
-[21:13] <Ident, odd>
+[21:9] <Ident, sum_odd>
 [21:17] <Assign, =>
 [21:19] <Number, 0>
 [23:5] <Keyword, loop>
@@ -78,9 +76,7 @@
 [29:23] <LBrace, {>
 [30:13] <Keyword, continue>
 [31:9] <RBrace, }>
-[32:9] <Ident, sum>
-[32:12] <Underscore, _>
-[32:13] <Ident, odd>
+[32:9] <Ident, sum_odd>
 [32:17] <PlusAssign, +=>
 [32:20] <Ident, n>
 [33:5] <RBrace, }>
@@ -89,9 +85,7 @@
 [35:11] <Assign, =>
 [35:13] <Number, 1>
 [36:5] <Keyword, i32>
-[36:9] <Ident, sum>
-[36:12] <Underscore, _>
-[36:13] <Ident, all>
+[36:9] <Ident, sum_all>
 [36:17] <Assign, =>
 [36:19] <Number, 0>
 [37:5] <Keyword, while>
@@ -99,9 +93,7 @@
 [37:13] <LessEq, <=>
 [37:16] <Number, 5>
 [37:18] <LBrace, {>
-[38:9] <Ident, sum>
-[38:12] <Underscore, _>
-[38:13] <Ident, all>
+[38:9] <Ident, sum_all>
 [38:17] <PlusAssign, +=>
 [38:20] <Ident, k>
 [39:9] <Ident, k>
@@ -109,9 +101,7 @@
 [39:14] <Number, 1>
 [40:5] <RBrace, }>
 [42:5] <Keyword, i32>
-[42:9] <Ident, sum>
-[42:12] <Underscore, _>
-[42:13] <Keyword, for>
+[42:9] <Ident, sum_for>
 [42:17] <Assign, =>
 [42:19] <Number, 0>
 [43:5] <Keyword, for>
@@ -128,9 +118,7 @@
 [43:30] <PlusAssign, +=>
 [43:33] <Number, 1>
 [43:35] <LBrace, {>
-[44:9] <Ident, sum>
-[44:12] <Underscore, _>
-[44:13] <Keyword, for>
+[44:9] <Ident, sum_for>
 [44:17] <PlusAssign, +=>
 [44:20] <Ident, i>
 [45:5] <RBrace, }>

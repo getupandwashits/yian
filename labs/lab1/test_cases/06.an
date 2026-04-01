@@ -19,5 +19,15 @@ i32 main() {
         s3 += *p
     }
 
+    i32* heap_obj1 = dyn i32
+    i32* heap_obj2 = dyn i32[3]
+    *heap_obj1 = 100
+    heap_obj2[0] = 10
+    heap_obj2[1] = 20
+    heap_obj2[2] = 30
+
+    del heap_obj1
+    del heap_obj2
+
     return 0
 }

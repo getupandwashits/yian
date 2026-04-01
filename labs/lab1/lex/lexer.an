@@ -269,15 +269,8 @@ pub tokenize(String* out, str source, HashSet<str>* keyword_table) {
             // InIdent 状态
             // ========================================
             InIdent {
-                if ch.is_ascii_alphanumeric() {
+                if ch.is_ascii_alphanumeric() or ch == b'_' {
                     buf.push(char(ch))
-                    pos += 1
-                } elif ch == b'\'' and buf.as_str() == "b" {
-                    // b' → 字节字面量
-                    tok_line = line
-                    tok_col  = col - 1
-                    state = State.InChar
-                    buf = String.new()
                     pos += 1
                 } else {
                     // ========= TODO =========
