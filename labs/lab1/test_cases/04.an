@@ -5,11 +5,17 @@ i32 main() {
     i32 b = (8 + 5) * (2 - 3)
 
     i32 res1
+    res1 = -a
     res1 = a + b
     res1 = a - b
     res1 = a * b
     res1 = a / b
     res1 = a % b
+    res1 += b
+    res1 -= b
+    res1 *= b
+    res1 /= b
+    res1 %= b
 
     bool res2
     res2 = a == b
@@ -23,6 +29,19 @@ i32 main() {
     res3 = (a > b) and (b > 0)
     res3 = (a > b) or (b > 0)
     res3 = not (a > b)
+
+    i32 res4
+    res4 = a & b
+    res4 = a | b
+    res4 = a ^ b
+    res4 = ~a
+    res4 = a << 2
+    res4 = a >> 2
+    res4 &= b
+    res4 |= b
+    res4 ^= b
+    res4 <<= 2
+    res4 >>= 2
 
     return 0
 }

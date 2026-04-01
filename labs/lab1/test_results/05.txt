@@ -56,7 +56,7 @@
 [23:10] <LBrace, {>
 [24:9] <Keyword, if>
 [24:12] <Ident, n>
-[24:14] <GreaterEq, >=>
+[24:14] <GreaterEqual, >=>
 [24:17] <Number, 10>
 [24:20] <LBrace, {>
 [25:13] <Keyword, break>
@@ -71,7 +71,7 @@
 [29:12] <Ident, n>
 [29:14] <Percent, %>
 [29:16] <Number, 2>
-[29:18] <Eq, ==>
+[29:18] <Equal, ==>
 [29:21] <Number, 0>
 [29:23] <LBrace, {>
 [30:13] <Keyword, continue>
@@ -90,7 +90,7 @@
 [36:19] <Number, 0>
 [37:5] <Keyword, while>
 [37:11] <Ident, k>
-[37:13] <LessEq, <=>
+[37:13] <LessEqual, <=>
 [37:16] <Number, 5>
 [37:18] <LBrace, {>
 [38:9] <Ident, sum_all>
@@ -111,7 +111,7 @@
 [43:17] <Number, 1>
 [43:18] <Semi, ;>
 [43:20] <Ident, i>
-[43:22] <LessEq, <=>
+[43:22] <LessEqual, <=>
 [43:25] <Number, 5>
 [43:26] <Semi, ;>
 [43:28] <Ident, i>

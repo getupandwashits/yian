@@ -8,7 +8,7 @@
 [3:22] <LBrace, {>
 [4:5] <Keyword, if>
 [4:8] <Ident, n>
-[4:10] <LessEq, <=>
+[4:10] <LessEqual, <=>
 [4:13] <Number, 1>
 [4:15] <LBrace, {>
 [5:9] <Keyword, return>
@@ -35,7 +35,7 @@
 [11:12] <Ident, n>
 [11:14] <Percent, %>
 [11:16] <Number, 2>
-[11:18] <Eq, ==>
+[11:18] <Equal, ==>
 [11:21] <Number, 1>
 [12:1] <RBrace, }>
 [14:1] <Keyword, i32>
