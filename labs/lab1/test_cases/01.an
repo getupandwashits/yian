@@ -16,7 +16,7 @@ i32 main() {
 
     char k = 'A'
     bool l = true
-    str m = "Hello, Yian!"
+    str m = "Hello, Yian!\n"
 
     return 0
 }

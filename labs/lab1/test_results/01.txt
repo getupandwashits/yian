@@ -55,7 +55,7 @@
 [19:5] <Keyword, str>
 [19:9] <Ident, m>
 [19:11] <Assign, =>
-[19:13] <String, Hello, Yian!>
+[19:13] <String, Hello, Yian!\n>
 [21:5] <Keyword, return>
 [21:12] <Number, 0>
 [22:1] <RBrace, }>
