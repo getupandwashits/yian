@@ -1,26 +1,23 @@
-// Focus: array, for-in, C-style for, do-while
+// Focus: types: array and pointer
 
 i32 main() {
     i32[6] arr = [1, 2, 3, 4, 5, 6]
-    i32 s1 = 0
-
-    for x in arr {
-        s1 += x
+    i32 s1 = arr[0] + arr[5]
+    for i32 i = 1; i < 5; i += 1 {
+        s1 += arr[i]
     }
 
-    i32 s2 = 0
-    for i32 i = 1; i <= 4; i += 1 {
-        s2 += i
+    i32 var = 42
+    i32* p = &var
+    i32 s2 = *p + 1
+    *p += 1
+
+    i32* begin = &arr[0]
+    i32* end = &arr[5] + 1
+    i32 s3 = 0
+    for i32* p = begin; p < end; p += 1 {
+        s3 += *p
     }
-
-    i32 c = 0
-    do {
-        c += 2
-    } while c < 8
-
-    assert s1 == 21: "for-in failed"
-    assert s2 == 10: "for failed"
-    assert c == 8: "do-while failed"
 
     return 0
 }

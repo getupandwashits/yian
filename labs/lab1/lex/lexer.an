@@ -46,7 +46,8 @@ pub HashSet<str> gen_keyword_table() {
     keyword_table.insert("u16")
     keyword_table.insert("u32")
     keyword_table.insert("u64")
-    keyword_table.insert("float")
+    keyword_table.insert("f32")
+    keyword_table.insert("f64")
     keyword_table.insert("char")
     keyword_table.insert("bool")
     keyword_table.insert("str")
@@ -187,9 +188,6 @@ pub tokenize(String* out, str source, HashSet<str>* keyword_table) {
                         append_token(out, "Dot", ".", line, col)
                         pos += 1
                     }
-                } elif ch == b':' {
-                    append_token(out, "Colon", ":", line, col)
-                    pos += 1
                 } elif ch == b'&' {
                     append_token(out, "Ampersand", "&", line, col)
                     pos += 1

@@ -1,19 +1,22 @@
-// Focus: function declaration, call, return, and assert
-
-i32 add(i32 a, i32 b) {
-    return a + b
-}
-
-i32 sub(i32 a, i32 b) {
-    return a - b
-}
+// Focus: basic types
 
 i32 main() {
-    i32 x = add(8, 5)
-    i32 y = sub(8, 5)
+    i8 a = 42
+    i16 b = 1000
+    i32 c = 100000
+    i64 d = 10000000000
 
-    assert x == 13: "add failed"
-    assert y == 3: "sub failed"
+    u8 e = 255
+    u16 f = 65535
+    u32 g = 4294967295
+    u64 h = 18446744073709551615
+
+    f32 i = 3.14
+    f64 j = 2.718281828459045
+
+    char k = 'A'
+    bool l = true
+    str m = "Hello, Yian!"
 
     return 0
 }

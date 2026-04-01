@@ -70,25 +70,7 @@
 [17:23] <LParen, (>
 [17:24] <Number, 8>
 [17:25] <RParen, )>
-[19:5] <Keyword, assert>
-[19:12] <Ident, f>
-[19:14] <Eq, ==>
-[19:17] <Number, 720>
-[19:20] <Colon, :>
-[19:22] <String, factorial failed>
-[20:5] <Keyword, assert>
-[20:12] <Ident, odd>
-[20:16] <Eq, ==>
-[20:19] <Keyword, true>
-[20:23] <Colon, :>
-[20:25] <String, odd check failed>
-[21:5] <Keyword, assert>
-[21:12] <Ident, even>
-[21:17] <Eq, ==>
-[21:20] <Keyword, false>
-[21:25] <Colon, :>
-[21:27] <String, even check failed>
-[23:5] <Keyword, return>
-[23:12] <Number, 0>
-[24:1] <RBrace, }>
-[25:1] <EOF, >
+[19:5] <Keyword, return>
+[19:12] <Number, 0>
+[20:1] <RBrace, }>
+[21:1] <EOF, >

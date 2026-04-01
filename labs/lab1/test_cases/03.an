@@ -1,24 +1,17 @@
-// Focus: struct fields, impl, static constructor, instance method
+// Focus: struct and struct constructor
 
 struct Box2D {
-    pub i32 w
-    pub i32 h
+    i32 w
+    i32 h
 }
 
-impl Box2D {
-    static pub Self new(i32 w, i32 h) {
-        return Self(w = w, h = h)
-    }
-
-    pub i32 area() {
-        return self.w * self.h
-    }
+i32 area(Box2D b) {
+    return b.w * b.h
 }
 
 i32 main() {
-    Box2D b = Box2D.new(7, 3)
-    i32 a = b.area()
+    Box2D b = Box2D(3, 7)
+    i32 a = area(b)
 
-    assert a == 21: "area failed"
     return 0
 }

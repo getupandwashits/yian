@@ -1,4 +1,20 @@
-// Focus: loop, break, continue, and while
+// Focus: control flow: loop, for, while, if, match, break, continue
+
+enum Grade {
+    A
+    B
+    C
+    F
+}
+
+i32 score(Grade g) {
+    match g {
+        A { return 4 }
+        B { return 3 }
+        C { return 2 }
+        F { return 0 }
+    }
+}
 
 i32 main() {
     i32 n = 0
@@ -7,8 +23,9 @@ i32 main() {
     loop {
         if n >= 10 {
             break
+        } else {
+            n += 1
         }
-        n += 1
         if n % 2 == 0 {
             continue
         }
@@ -22,8 +39,13 @@ i32 main() {
         k += 1
     }
 
-    assert sum_odd == 25: "loop odd sum failed"
-    assert sum_all == 15: "while sum failed"
+    i32 sum_for = 0
+    for i32 i = 1; i <= 5; i += 1 {
+        sum_for += i
+    }
+
+    Grade g = Grade.B
+    i32 s = score(g)
 
     return 0
 }

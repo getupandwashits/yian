@@ -1,28 +1,28 @@
-// Focus: enum declaration and match expression style control flow
-
-enum Grade {
-    A
-    B
-    C
-    F
-}
-
-i32 score(Grade g) {
-    match g {
-        A { return 4 }
-        B { return 3 }
-        C { return 2 }
-        F { return 0 }
-        _ { return -1 }
-    }
-}
+// Focus: operations: arithmetic, comparison, logical
 
 i32 main() {
-    Grade g1 = Grade.A
-    Grade g2 = Grade.C
+    i32 a = 8 + 5 * 2 - 3
+    i32 b = (8 + 5) * (2 - 3)
 
-    assert score(g1) == 4: "grade A failed"
-    assert score(g2) == 2: "grade C failed"
+    i32 res1
+    res1 = a + b
+    res1 = a - b
+    res1 = a * b
+    res1 = a / b
+    res1 = a % b
+
+    bool res2
+    res2 = a == b
+    res2 = a != b
+    res2 = a < b
+    res2 = a <= b
+    res2 = a > b
+    res2 = a >= b
+
+    bool res3
+    res3 = (a > b) and (b > 0)
+    res3 = (a > b) or (b > 0)
+    res3 = not (a > b)
 
     return 0
 }

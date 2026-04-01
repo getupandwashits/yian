@@ -8,8 +8,8 @@ from lexer import gen_keyword_table, tokenize
 i32 main() {
     HashSet<str> keyword_table = gen_keyword_table()
 
-    str input_path  = "lab/test_cases/01.an"
-    str output_path = "lab/result/01.txt"
+    str input_path  = "labs/lab1/test_cases/01.an"
+    str output_path = "labs/lab1/test_results/01.txt"
 
     str source = read_file(input_path)
 
