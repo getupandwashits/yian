@@ -57,9 +57,10 @@ scripts/yian_compiler.py labs/lab1/test_cases/hello.an
 
 1. `lexer_main.an::main()` 读取测试输入文件。
 2. `lexer.an::tokenize(...)` 使用有限自动机扫描字符流。
-4. 最终写入输出文件（`labs/lab1/output/xx.txt`）。
+3. 最终写入输出文件（`labs/lab1/output/xx.txt`）。
 
 ### 3.3 涉及的类型
+
 - `enum`：[Enum](../../../docs/grammar/02.type_system.md#enum)
 - `str`：[str: 字符串切片](../../../docs/grammar/08.standard_library.md#str-字符串切片)
 - `String`：[string: 可变字符串](../../../docs/grammar/08.standard_library.md#string-可变字符串)
@@ -85,7 +86,7 @@ scripts/yian_compiler.py labs/lab1/test_cases/hello.an
 你可以通过下面的方式测试你的词法分析器：
 
 1. 修改 `labs/lab1/lex/lexer_main.an` 中所包含的测试名(你也可以构造自己的测试)
-2. 命令行执行: `scripts/yian_compiler.py labs/lab1/lex/lexer`
+2. 命令行执行: `scripts/yian_compiler.py labs/lab1/lex`
 3. 执行生成的可执行文件, 将会在 `labs/lab1/output/` 目录下生成对应的输出文件, 与 `labs/lab1/test_results/` 中的参考输出进行对比。
 4. 因为一些神秘小 BUG, 你需要自己创建 `labs/lab1/output/` 目录, 否则输出文件无法生成。
 
@@ -147,3 +148,4 @@ scripts/yian_compiler.py labs/lab1/test_cases/hello.an
 
 - 禁止抄袭。
 - 可以使用 AI 辅助工具，但你最好知道自己的代码在做什么。
+
