@@ -1,0 +1,106 @@
+from std.core.vec import Vec
+from std.core.string import String
+from std.core.option import Option
+
+from expr import Expr
+
+pub enum ASTType {
+    // Basic types
+    I8, I16, I32, I64,
+    U8, U16, U32, U64,
+    F32, F64,
+    Char, Bool, Str, Void,
+    // Compound types
+    Array {
+        ASTType* element_type
+        u64 length
+    }
+    Pointer {
+        ASTType* pointee_type
+    }
+    // Custom types
+    Custom { String name }
+}
+
+struct Program {
+    Vec<ProgramItem> items
+}
+
+enum ProgramItem {
+    FuncDef { FuncDef func_def }
+    StructDef { StructDef struct_def }
+    EnumDef { EnumDef enum_def }
+}
+
+struct FuncDef {
+    String name
+    Vec<(String, ASTType)> params
+    ASTType return_type
+    Vec<Stmt> body
+}
+
+struct StructDef {
+    String name
+    Vec<(String, ASTType)> fields
+}
+
+struct EnumDef {
+    String name
+    Vec<String> variants
+}
+
+enum Stmt {
+    // Basic statements
+    VarDecl {
+        String name
+        ASTType type
+        Option<Expr> init
+    }
+    Assign {
+        Expr target
+        AssignOp op
+        Expr value
+    }
+    Delete {
+        Expr target
+    }
+    // Control flow statements
+    If {
+        Expr condition
+        Vec<Stmt> then_branch
+        Option<Vec<Stmt>> else_branch
+    }
+    Loop {
+        Vec<Stmt> body
+    }
+    While {
+        Expr condition
+        Vec<Stmt> body
+    }
+    For {
+        Option<Stmt> init
+        Option<Expr> condition
+        Option<Stmt> update
+        Vec<Stmt> body
+    }
+    Match {
+        Expr value
+        Vec<(Pattern, Vec<Stmt>)> arms
+    }
+    Return {
+        Option<Expr> value
+    }
+}
+
+enum AssignOp {
+    Assign,
+    AddAssign, SubAssign, MulAssign, DivAssign, ModAssign,
+    BitAndAssign, BitOrAssign, BitXorAssign, ShlAssign, ShrAssign
+}
+
+enum Pattern {
+    Wildcard,
+    Int { i64 value }
+    Char { char value }
+    Ident { String name }
+}

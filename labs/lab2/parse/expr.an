@@ -1,0 +1,55 @@
+from std.core.string import String
+from std.core.vec import Vec
+from std.core.option import Option
+
+from ast import ASTType
+
+pub enum Expr {
+    Lit { Literal lit }
+    Ident { String name }  // Variable or Enum
+    Binary {
+        Expr* left
+        BinaryOp op
+        Expr* right
+    }
+    Unary {
+        UnaryOp op
+        Expr* operand
+    }
+    Call {
+        String callee
+        Vec<Expr> args
+    }
+    FieldAccess {
+        Expr* base
+        String field
+    }
+    Dyn {
+        ASTType type
+        Option<Expr*> array_size
+    }
+}
+
+enum Literal {
+    Int { u64 value }
+    Float { f64 value }
+    Char { char value }
+    Str { String value }
+    Bool { bool value }
+    Array { Vec<Literal> elements }
+}
+
+enum BinaryOp {
+    Index,
+    Add, Sub, Mul, Div, Mod,
+    Eq, Neq, Lt, Gt, Leq, Geq,
+    BitAnd, BitOr, BitXor, Shl, Shr,
+    LogicAnd, LogicOr
+}
+
+enum UnaryOp {
+    Deref, AddrOf,
+    Neg,
+    BitNot,
+    LogicNot,
+}
