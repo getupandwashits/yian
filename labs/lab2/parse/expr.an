@@ -44,12 +44,15 @@ enum BinaryOp {
     Add, Sub, Mul, Div, Mod,
     Eq, Neq, Lt, Gt, Leq, Geq,
     BitAnd, BitOr, BitXor, Shl, Shr,
-    LogicAnd, LogicOr
+    LogicAnd, LogicOr,
+    Assign,
+    AddAssign, SubAssign, MulAssign, DivAssign, ModAssign,
+    BitAndAssign, BitOrAssign, BitXorAssign, ShlAssign, ShrAssign
 }
 
 enum UnaryOp {
     Deref, AddrOf,
     Neg,
     BitNot,
-    LogicNot,
+    LogicNot
 }

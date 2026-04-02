@@ -22,45 +22,41 @@ pub enum ASTType {
     Custom { String name }
 }
 
-struct Program {
-    Vec<ProgramItem> items
+pub struct Program {
+    pub Vec<ProgramItem> items
 }
 
-enum ProgramItem {
+pub enum ProgramItem {
     FuncDef { FuncDef func_def }
     StructDef { StructDef struct_def }
     EnumDef { EnumDef enum_def }
 }
 
-struct FuncDef {
-    String name
-    Vec<(String, ASTType)> params
-    ASTType return_type
-    Vec<Stmt> body
+pub struct FuncDef {
+    pub String name
+    pub Vec<(String, ASTType)> params
+    pub ASTType return_type
+    pub Vec<Stmt> body
 }
 
-struct StructDef {
-    String name
-    Vec<(String, ASTType)> fields
+pub struct StructDef {
+    pub String name
+    pub Vec<(String, ASTType)> fields
 }
 
-struct EnumDef {
-    String name
-    Vec<String> variants
+pub struct EnumDef {
+    pub String name
+    pub Vec<String> variants
 }
 
-enum Stmt {
+pub enum Stmt {
     // Basic statements
     VarDecl {
         String name
         ASTType type
         Option<Expr> init
     }
-    Assign {
-        Expr target
-        AssignOp op
-        Expr value
-    }
+    ExprStmt { Expr expr }
     Delete {
         Expr target
     }
@@ -68,6 +64,7 @@ enum Stmt {
     If {
         Expr condition
         Vec<Stmt> then_branch
+        Vec<(Expr, Vec<Stmt>)> elif_branches
         Option<Vec<Stmt>> else_branch
     }
     Loop {
@@ -80,7 +77,7 @@ enum Stmt {
     For {
         Option<Stmt> init
         Option<Expr> condition
-        Option<Stmt> update
+        Option<Expr> update
         Vec<Stmt> body
     }
     Match {
@@ -90,12 +87,7 @@ enum Stmt {
     Return {
         Option<Expr> value
     }
-}
-
-enum AssignOp {
-    Assign,
-    AddAssign, SubAssign, MulAssign, DivAssign, ModAssign,
-    BitAndAssign, BitOrAssign, BitXorAssign, ShlAssign, ShrAssign
+    Break, Continue
 }
 
 enum Pattern {
