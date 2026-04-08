@@ -32,7 +32,7 @@ pub enum Expr {
     }
 }
 
-enum Literal {
+pub enum Literal {
     Int { u64 value }
     Float { f64 value }
     Char { char value }
@@ -41,7 +41,7 @@ enum Literal {
     Array { Vec<Literal> elements }
 }
 
-enum BinaryOp {
+pub enum BinaryOp {
     Index,
     Add, Sub, Mul, Div, Mod,
     Eq, Neq, Lt, Gt, Leq, Geq,
@@ -123,7 +123,7 @@ impl BinaryOp {
     }
 }
 
-enum UnaryOp {
+pub enum UnaryOp {
     Deref, AddrOf,
     Neg,
     BitNot,

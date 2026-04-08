@@ -33,9 +33,9 @@ pub struct Program {
 }
 
 pub enum ProgramItem {
-    FuncDef { FuncDef func_def }
-    StructDef { StructDef struct_def }
-    EnumDef { EnumDef enum_def }
+    Func { FuncDef func_def }
+    Struct { StructDef struct_def }
+    Enum { EnumDef enum_def }
 }
 
 pub struct FuncDef {
@@ -262,9 +262,9 @@ impl Program {
 impl ProgramItem {
     pub String export(Vec<bool> guides, bool is_last) {
         match *self {
-            FuncDef as f { return f.func_def.export(guides, is_last) }
-            StructDef as s { return s.struct_def.export(guides, is_last) }
-            EnumDef as e { return e.enum_def.export(guides, is_last) }
+            Func as f { return f.func_def.export(guides, is_last) }
+            Struct as s { return s.struct_def.export(guides, is_last) }
+            Enum as e { return e.enum_def.export(guides, is_last) }
         }
     }
 }
