@@ -3,6 +3,7 @@ from std.core.vec import Vec
 from std.core.option import Option
 
 from ast import ASTType
+from token import Keyword, Token
 
 pub enum Expr {
     Lit { Literal lit }
@@ -48,6 +49,77 @@ enum BinaryOp {
     Assign,
     AddAssign, SubAssign, MulAssign, DivAssign, ModAssign,
     BitAndAssign, BitOrAssign, BitXorAssign, ShlAssign, ShrAssign
+}
+
+pub struct InfixInfo {
+    pub BinaryOp op
+    pub u64 left_bp
+    pub u64 right_bp
+}
+
+impl Literal {
+    static pub Self from_token(Token token) {
+        match token.data {
+            Lit as t {
+                match t.lit {
+                    Int as n { return Literal.Int(n.value) }
+                    Float as n { return Literal.Float(n.value) }
+                    Char as n {
+                        char value = n.text.chars().next().unwrap()
+                        return Literal.Char(value)
+                    }
+                    Str as n { return Literal.Str(n.text.clone()) }
+                    _ { panic("Unexpected literal token") }
+                }
+            }
+            _ {
+                panic("Unexpected literal token")
+            }
+        }
+    }
+}
+
+impl BinaryOp {
+    static pub Option<InfixInfo> from_keyword(Keyword kw) {
+        match kw {
+            Assign { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Assign, 1, 1)) }
+            PlusAssign { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.AddAssign, 1, 1)) }
+            MinusAssign { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.SubAssign, 1, 1)) }
+            StarAssign { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.MulAssign, 1, 1)) }
+            SlashAssign { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.DivAssign, 1, 1)) }
+            PercentAssign { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.ModAssign, 1, 1)) }
+            AmpersandAssign { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.BitAndAssign, 1, 1)) }
+            PipeAssign { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.BitOrAssign, 1, 1)) }
+            CaretAssign { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.BitXorAssign, 1, 1)) }
+            ShiftLeftAssign { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.ShlAssign, 1, 1)) }
+            ShiftRightAssign { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.ShrAssign, 1, 1)) }
+
+            Or { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.LogicOr, 2, 3)) }
+            And { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.LogicAnd, 3, 4)) }
+            Pipe { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.BitOr, 4, 5)) }
+            Caret { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.BitXor, 5, 6)) }
+            Ampersand { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.BitAnd, 6, 7)) }
+
+            Equal { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Eq, 7, 8)) }
+            NotEqual { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Neq, 7, 8)) }
+
+            Less { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Lt, 8, 9)) }
+            LessEqual { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Leq, 8, 9)) }
+            Greater { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Gt, 8, 9)) }
+            GreaterEqual { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Geq, 8, 9)) }
+
+            ShiftLeft { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Shl, 9, 10)) }
+            ShiftRight { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Shr, 9, 10)) }
+
+            Plus { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Add, 10, 11)) }
+            Minus { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Sub, 10, 11)) }
+            Star { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Mul, 11, 12)) }
+            Slash { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Div, 11, 12)) }
+            Percent { return Option<InfixInfo>.Some(InfixInfo(BinaryOp.Mod, 11, 12)) }
+
+            _ { return Option<InfixInfo>.None }
+        }
+    }
 }
 
 enum UnaryOp {

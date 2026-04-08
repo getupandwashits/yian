@@ -90,7 +90,7 @@ pub enum Stmt {
     Break, Continue
 }
 
-enum Pattern {
+pub enum Pattern {
     Wildcard,
     Int { i64 value }
     Char { char value }
