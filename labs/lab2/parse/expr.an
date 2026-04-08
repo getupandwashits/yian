@@ -173,8 +173,8 @@ impl ToString for BinaryOp {
             BitXor { return String.from("^") }
             Shl { return String.from("<<") }
             Shr { return String.from(">>") }
-            LogicAnd { return String.from("&&") }
-            LogicOr { return String.from("||") }
+            LogicAnd { return String.from("and") }
+            LogicOr { return String.from("or") }
             Assign { return String.from("=") }
             AddAssign { return String.from("+=") }
             SubAssign { return String.from("-=") }
@@ -197,7 +197,7 @@ impl ToString for UnaryOp {
             AddrOf { return String.from("&") }
             Neg { return String.from("-") }
             BitNot { return String.from("~") }
-            LogicNot { return String.from("!") }
+            LogicNot { return String.from("not") }
         }
     }
 }
