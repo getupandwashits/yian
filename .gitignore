@@ -360,3 +360,5 @@ target
 labs/
 
 compiler/frontend/grammar/src/parser.c
+
+.github/
