@@ -1,6 +1,7 @@
 from std.core.vec import Vec
 from std.core.string import String
 from std.core.option import Option
+from std.core.fmt import ToString
 
 from expr import Expr
 
@@ -95,4 +96,364 @@ pub enum Pattern {
     Int { i64 value }
     Char { char value }
     Ident { String name }
+}
+
+// ===== Implement Formatting =====
+
+impl ToString for ASTType {
+    pub String to_string() {
+        match *self {
+            I8 { return String.from("i8") }
+            I16 { return String.from("i16") }
+            I32 { return String.from("i32") }
+            I64 { return String.from("i64") }
+            U8 { return String.from("u8") }
+            U16 { return String.from("u16") }
+            U32 { return String.from("u32") }
+            U64 { return String.from("u64") }
+            F32 { return String.from("f32") }
+            F64 { return String.from("f64") }
+            Char { return String.from("char") }
+            Bool { return String.from("bool") }
+            Str { return String.from("str") }
+            Void { return String.from("void") }
+            Array as a {
+                return a.element_type.to_string() + "[" + a.length.to_string() + "]"
+            }
+            Pointer as p {
+                return p.pointee_type.to_string() + "*"
+            }
+            Custom as c { return c.name.clone() }
+        }
+    }
+}
+
+impl ToString for Pattern {
+    pub String to_string() {
+        match *self {
+            Wildcard { return String.from("_") }
+            Int as i { return i.value.to_string() }
+            Char as c { return c.value.to_string() }
+            Ident as id { return id.name.clone() }
+        }
+    }
+}
+
+impl Expr {
+    pub String export(Vec<bool> guides, bool is_last) {
+        Vec<bool> child_guides = guides
+        child_guides.push(!is_last)
+        String out = prefix(guides, is_last)
+
+        match *self {
+            Lit as l {
+                out += "Lit"
+                out += ": "
+                out += l.lit.to_string()
+                out += "\n"
+            }
+            Ident as i {
+                out += "Ident: "
+                out += i.name
+                out += "\n"
+            }
+            Binary as b {
+                out += "Binary: "
+                out += b.op.to_string()
+                out += "\n"
+
+                out += b.left.export(child_guides, false)
+                out += b.right.export(child_guides, true)
+            }
+            Unary as u {
+                out += "Unary: "
+                out += u.op.to_string()
+                out += "\n"
+                out += u.operand.export(child_guides, true)
+            }
+            Call as c {
+                out += "Call: "
+                out += c.callee
+                out += "\n"
+                out += export_items(c.args, child_guides)
+            }
+            FieldAccess as f {
+                out += "FieldAccess: "
+                out += f.field
+                out += "\n"
+                out += f.base.export(child_guides, true)
+            }
+            Dyn as d {
+                out += "Dyn: "
+                out += d.type.to_string()
+                if d.array_size.is_some() {
+                    out += "\n"
+                    out += d.array_size.unwrap().export(child_guides, true)
+                } else {
+                    out += "\n"
+                }
+            }
+        }
+        return out
+    }
+}
+
+// 輔助函數：生成 AST 导出字符串的前缀
+String prefix(Vec<bool> guides, bool is_last) {
+    String out = String.new()
+    for has_next in guides {
+        if has_next {
+            out += "│   "
+        } else {
+            out += "    "
+        }
+    }
+    if is_last {
+        out += "└── "
+    } else {
+        out += "├── "
+    }
+    return out
+}
+
+// 輔助函數：导出 AST 项列表
+String export_items<T>(Vec<T> items, Vec<bool> guides) {
+    String out = String.new()
+    for i in 0..items.len() {
+        out += items[i].export(guides, i == items.len() - 1)
+    }
+    return out
+}
+
+// 輔助函數：将字符串列表连接成一个逗号分隔的字符串
+String concat_items(Vec<String> items) {
+    String out = String.new()
+    for i in 0..items.len() {
+        out += items[i]
+        if i != items.len() - 1 {
+            out += ", "
+        }
+    }
+    return out
+}
+
+impl Program {
+    pub String export() {
+        String out = String.from("Program\n")
+        out += export_items(self.items, Vec<bool>.new())
+        return out
+    }
+}
+
+impl ProgramItem {
+    pub String export(Vec<bool> guides, bool is_last) {
+        match *self {
+            FuncDef as f { return f.func_def.export(guides, is_last) }
+            StructDef as s { return s.struct_def.export(guides, is_last) }
+            EnumDef as e { return e.enum_def.export(guides, is_last) }
+        }
+    }
+}
+
+impl FuncDef {
+    pub String export(Vec<bool> guides, bool is_last) {
+        Vec<bool> body_guides = guides
+        body_guides.push(!is_last)
+
+        String out = prefix(guides, is_last)
+        out += "FuncDef: "
+        out += self.name
+        out += "("
+        
+        Vec<String> param_strs = Vec<String>.new()
+        for param in self.params {
+            param_strs.push(param[1].to_string() + " " + param[0])
+        }
+        out += concat_items(param_strs)
+
+        out += ") -> "
+        out += self.return_type.to_string()
+        out += "\n"
+        out += export_items(self.body, body_guides)
+        return out
+    }
+}
+
+impl StructDef {
+    pub String export(Vec<bool> guides, bool is_last) {
+        String out = prefix(guides, is_last)
+        out += "StructDef: "
+        out += self.name
+        out += "\n"
+
+        Vec<bool> field_guides = guides
+        field_guides.push(!is_last)
+        for i in 0..self.fields.len() {
+            out += prefix(field_guides, i == self.fields.len() - 1) + self.fields[i][1].to_string() + " " + self.fields[i][0] + "\n"
+        }
+        return out
+    }
+}
+
+impl EnumDef {
+    pub String export(Vec<bool> guides, bool is_last) {
+        String out = prefix(guides, is_last)
+        out += "EnumDef: "
+        out += self.name
+        out += "\n"
+
+        Vec<bool> variant_guides = guides
+        variant_guides.push(!is_last)
+        for i in 0..self.variants.len() {
+            out += prefix(variant_guides, i == self.variants.len() - 1) + self.variants[i] + "\n"
+        }
+        return out
+    }
+}
+
+impl Stmt {
+    pub String export(Vec<bool> guides, bool is_last) {
+        String out = prefix(guides, is_last)
+        Vec<bool> child_guides = guides
+        child_guides.push(!is_last)
+
+        match *self {
+            VarDecl as v {
+                out += "VarDecl: "
+                out += v.type.to_string() + " " + v.name
+                if v.init.is_some() {
+                    out += " =\n"
+                    out += v.init.unwrap().export(child_guides, true)
+                }
+                out += "\n"
+            }
+            ExprStmt as e {
+                out += "ExprStmt:\n"
+                out += e.expr.export(child_guides, true)
+            }
+            Delete as d {
+                out += "Delete:\n"
+                out += d.target.export(child_guides, true)
+            }
+            If as i {
+                out += "If:\n"
+
+                bool has_elif = i.elif_branches.len() > 0
+                bool has_else = i.else_branch.is_some()
+
+                out += i.condition.export(child_guides, false)
+
+                bool then_is_last = !has_elif && !has_else
+                out += prefix(child_guides, then_is_last) + "Then:\n"
+                Vec<bool> then_guides = child_guides
+                then_guides.push(!then_is_last)
+                out += export_items(i.then_branch, then_guides)
+
+                for idx in 0..i.elif_branches.len() {
+                    bool elif_is_last = idx == i.elif_branches.len() - 1 && !has_else
+                    out += prefix(child_guides, elif_is_last) + "Elif:\n"
+
+                    Vec<bool> elif_guides = child_guides
+                    elif_guides.push(!elif_is_last)
+
+                    out += i.elif_branches[idx][0].export(elif_guides, i.elif_branches[idx][1].len() == 0)
+                    out += export_items(i.elif_branches[idx][1], elif_guides)
+                }
+
+                if has_else {
+                    out += prefix(child_guides, true) + "Else:\n"
+                    Vec<bool> else_guides = child_guides
+                    else_guides.push(false)
+                    out += export_items(i.else_branch.unwrap(), else_guides)
+                }
+            }
+            Loop as l {
+                out += "Loop:\n"
+                out += export_items(l.body, child_guides)
+            }
+            While as w {
+                out += "While:\n"
+
+                out += w.condition.export(child_guides, w.body.len() == 0)
+                out += export_items(w.body, child_guides)
+            }
+            For as f {
+                out += "For:\n"
+
+                u64 label_count = 0
+                if f.init.is_some() {
+                    label_count += 1
+                }
+                if f.condition.is_some() {
+                    label_count += 1
+                }
+                if f.update.is_some() {
+                    label_count += 1
+                }
+                bool has_body = f.body.len() > 0
+                u64 printed = 0
+
+                if f.init.is_some() {
+                    bool init_is_last = printed + 1 == label_count && !has_body
+                    out += prefix(child_guides, init_is_last) + "Init:\n"
+
+                    Vec<bool> init_guides = child_guides
+                    init_guides.push(!init_is_last)
+                    out += f.init.unwrap().export(init_guides, true)
+                    printed += 1
+                }
+
+                if f.condition.is_some() {
+                    bool cond_is_last = printed + 1 == label_count && !has_body
+                    out += prefix(child_guides, cond_is_last) + "Condition:\n"
+
+                    Vec<bool> cond_guides = child_guides
+                    cond_guides.push(!cond_is_last)
+                    out += f.condition.unwrap().export(cond_guides, true)
+                    printed += 1
+                }
+
+                if f.update.is_some() {
+                    bool update_is_last = printed + 1 == label_count && !has_body
+                    out += prefix(child_guides, update_is_last) + "Update:\n"
+
+                    Vec<bool> update_guides = child_guides
+                    update_guides.push(!update_is_last)
+                    out += f.update.unwrap().export(update_guides, true)
+                }
+
+                out += export_items(f.body, child_guides)
+            }
+            Match as m {
+                out += "Match:\n"
+
+                out += m.value.export(child_guides, m.arms.len() == 0)
+
+                for idx in 0..m.arms.len() {
+                    bool arm_is_last = idx == m.arms.len() - 1
+                    out += prefix(child_guides, arm_is_last) + "Arm:\n"
+
+                    Vec<bool> arm_guides = child_guides
+                    arm_guides.push(!arm_is_last)
+                    out += prefix(arm_guides, m.arms[idx][1].len() == 0) + m.arms[idx][0].to_string() + "\n"
+
+                    Vec<bool> arm_body_guides = arm_guides
+                    arm_body_guides.push(m.arms[idx][1].len() > 0)
+                    out += export_items(m.arms[idx][1], arm_body_guides)
+                }
+            }
+            Return as r {
+                out += "Return"
+                if r.value.is_some() {
+                    out += ":\n"
+                    out += r.value.unwrap().export(child_guides, true)
+                } else {
+                    out += "\n"
+                }
+            }
+            Break { out += "Break\n" }
+            Continue { out += "Continue\n" }
+        }
+        return out
+    }
 }

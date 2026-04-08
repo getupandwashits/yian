@@ -1,6 +1,7 @@
 from std.core.string import String
 from std.core.vec import Vec
 from std.core.option import Option
+from std.core.fmt import ToString
 
 from ast import ASTType
 from token import Keyword, Token
@@ -127,4 +128,76 @@ enum UnaryOp {
     Neg,
     BitNot,
     LogicNot
+}
+
+impl ToString for Literal {
+    pub String to_string() {
+        match *self {
+            Int as i { return i.value.to_string() }
+            Float as f { return f.value.to_string() }
+            Char as c { return c.value.to_string() }
+            Str as s { return "\"" + s.value.clone() + "\"" }
+            Bool as b { return b.value.to_string() }
+            Array as a {
+                String out = String.from("[")
+                for i in 0..a.elements.len() {
+                    out += a.elements[i].to_string()
+                    if i != a.elements.len() - 1 {
+                        out += ", "
+                    }
+                }
+                out += "]"
+                return out
+            }
+        }
+    }
+}
+
+impl ToString for BinaryOp {
+    pub String to_string() {
+        match *self {
+            Index { return String.from("[]") }
+            Add { return String.from("+") }
+            Sub { return String.from("-") }
+            Mul { return String.from("*") }
+            Div { return String.from("/") }
+            Mod { return String.from("%") }
+            Eq { return String.from("==") }
+            Neq { return String.from("!=") }
+            Lt { return String.from("<") }
+            Gt { return String.from(">") }
+            Leq { return String.from("<=") }
+            Geq { return String.from(">=") }
+            BitAnd { return String.from("&") }
+            BitOr { return String.from("|") }
+            BitXor { return String.from("^") }
+            Shl { return String.from("<<") }
+            Shr { return String.from(">>") }
+            LogicAnd { return String.from("&&") }
+            LogicOr { return String.from("||") }
+            Assign { return String.from("=") }
+            AddAssign { return String.from("+=") }
+            SubAssign { return String.from("-=") }
+            MulAssign { return String.from("*=") }
+            DivAssign { return String.from("/=") }
+            ModAssign { return String.from("%=") }
+            BitAndAssign { return String.from("&=") }
+            BitOrAssign { return String.from("|=") }
+            BitXorAssign { return String.from("^=") }
+            ShlAssign { return String.from("<<=") }
+            ShrAssign { return String.from(">>=") }
+        }
+    }
+}
+
+impl ToString for UnaryOp {
+    pub String to_string() {
+        match *self {
+            Deref { return String.from("*") }
+            AddrOf { return String.from("&") }
+            Neg { return String.from("-") }
+            BitNot { return String.from("~") }
+            LogicNot { return String.from("!") }
+        }
+    }
 }
