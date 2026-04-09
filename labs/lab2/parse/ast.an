@@ -149,10 +149,9 @@ impl ToString for VarInfo {
 }
 
 impl Expr {
-    pub String export(Vec<bool> guides, bool is_last) {
+    pub String export(Vec<bool>* guides, bool is_last) {
         String out = prefix(guides, is_last)
-        Vec<bool> child_guides = guides.clone()
-        child_guides.push(not is_last)
+        guides.push(not is_last)
 
         match *self {
             Lit as l {
@@ -170,47 +169,48 @@ impl Expr {
                 out += b.op.to_string()
                 out += "\n"
 
-                out += b.left.export(child_guides, false)
-                out += b.right.export(child_guides, true)
+                out += b.left.export(guides, false)
+                out += b.right.export(guides, true)
             }
             Unary as u {
                 out += "UnaryOp: op = "
                 out += u.op.to_string()
                 out += "\n"
 
-                out += u.operand.export(child_guides, true)
+                out += u.operand.export(guides, true)
             }
             Call as c {
                 out += "Call: callee = "
                 out += c.callee
                 out += "\n"
 
-                out += export_items(c.args, child_guides)
+                out += export_items(c.args, guides)
             }
             FieldAccess as f {
                 out += "FieldAccess: field = "
                 out += f.field
                 out += "\n"
 
-                out += f.base.export(child_guides, true)
+                out += f.base.export(guides, true)
             }
             Dyn as d {
                 out += "Dyn: type = "
                 out += d.type.to_string()
                 out += "\n"
                 if d.array_size.is_some() {
-                    out += d.array_size.unwrap().export(child_guides, true)
+                    out += d.array_size.unwrap().export(guides, true)
                 }
             }
         }
+        guides.pop()
         return out
     }
 }
 
 // 輔助函數：生成 AST 导出字符串的前缀
-String prefix(Vec<bool> guides, bool is_last) {
+String prefix(Vec<bool>* guides, bool is_last) {
     String out = String.new()
-    for has_next in guides {
+    for has_next in *guides {
         if has_next {
             out += "│   "
         } else {
@@ -226,7 +226,7 @@ String prefix(Vec<bool> guides, bool is_last) {
 }
 
 // 輔助函數：导出 AST 项列表
-String export_items<T>(Vec<T> items, Vec<bool> guides) {
+String export_items<T>(Vec<T> items, Vec<bool>* guides) {
     String out = String.new()
     for i in 0..items.len() {
         if i != items.len() - 1 {
@@ -253,13 +253,14 @@ String concat_items<T>(Vec<T> items) {
 impl Program {
     pub String export() {
         String out = String.from("Program\n")
-        out += export_items(self.items, Vec<bool>.new())
+        Vec<bool> guides = Vec<bool>.new()
+        out += export_items(self.items, &guides)
         return out
     }
 }
 
 impl ProgramItem {
-    pub String export(Vec<bool> guides, bool is_last) {
+    pub String export(Vec<bool>* guides, bool is_last) {
         match *self {
             Func as f { return f.func_def.export(guides, is_last) }
             Struct as s { return s.struct_def.export(guides, is_last) }
@@ -269,7 +270,7 @@ impl ProgramItem {
 }
 
 impl FuncDef {
-    pub String export(Vec<bool> guides, bool is_last) {
+    pub String export(Vec<bool>* guides, bool is_last) {
         String out = prefix(guides, is_last)
         out += "FuncDef: "
         out += self.name
@@ -290,7 +291,7 @@ impl FuncDef {
 }
 
 impl StructDef {
-    pub String export(Vec<bool> guides, bool is_last) {
+    pub String export(Vec<bool>* guides, bool is_last) {
         String out = prefix(guides, is_last)
         out += "StructDef: "
         out += self.name
@@ -304,7 +305,7 @@ impl StructDef {
 }
 
 impl EnumDef {
-    pub String export(Vec<bool> guides, bool is_last) {
+    pub String export(Vec<bool>* guides, bool is_last) {
         String out = prefix(guides, is_last)
         out += "EnumDef: "
         out += self.name
@@ -318,7 +319,7 @@ impl EnumDef {
 }
 
 impl Stmt {
-    pub String export(Vec<bool> guides, bool is_last) {
+    pub String export(Vec<bool>* guides, bool is_last) {
         String out = prefix(guides, is_last)
 
         match *self {
@@ -463,6 +464,8 @@ impl Stmt {
                 // export arms
                 out += prefix(guides, true) + "Arms:\n"
 
+                guides.push(false)
+
                 for idx in 0..m.arms.len() {
                     bool arm_is_last = idx == m.arms.len() - 1
                     out += prefix(guides, arm_is_last) + "Arm: " + m.arms[idx][0].to_string() + "\n"
@@ -471,6 +474,8 @@ impl Stmt {
                     out += export_items(m.arms[idx][1], guides)
                     guides.pop()
                 }
+
+                guides.pop()
 
                 guides.pop()
             }

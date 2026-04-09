@@ -29,8 +29,10 @@ i32 main() {
     tests.push("10")
 
 	for test in tests {
-		str input_path = (String.from("labs/lab2/test_cases/") + test + ".an").as_str()
-		str output_path = (String.from("labs/lab2/output/") + test + ".txt").as_str()
+        String input = String.from("labs/lab2/test_cases/") + test + ".an"
+        String output = String.from("labs/lab2/output/") + test + ".txt"
+		str input_path = input.as_str()
+		str output_path = output.as_str()
 
 		str source = read_file(input_path)
 		Vec<Token> tokens = tokenize(source)

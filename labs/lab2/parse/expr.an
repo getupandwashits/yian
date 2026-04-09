@@ -65,10 +65,7 @@ impl Literal {
                 match t.lit {
                     Int as n { return Literal.Int(n.value) }
                     Float as n { return Literal.Float(n.value) }
-                    Char as n {
-                        char value = n.text.chars().next().unwrap()
-                        return Literal.Char(value)
-                    }
+                    Char as n { return Literal.Char(n.ch) }
                     Str as n { return Literal.Str(n.text.clone()) }
                     _ { panic("Unexpected literal token") }
                 }
