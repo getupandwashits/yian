@@ -79,7 +79,7 @@ pub enum Stmt {
         Vec<Stmt> body
     }
     For {
-        Option<Stmt> init
+        Option<Stmt*> init
         Option<Expr> condition
         Option<Expr> update
         Vec<Stmt> body

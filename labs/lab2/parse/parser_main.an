@@ -45,4 +45,6 @@ i32 main() {
         print(output_path)
         print("\n")
 	}
+
+    return 0
 }

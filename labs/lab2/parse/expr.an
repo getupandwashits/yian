@@ -136,7 +136,7 @@ impl ToString for Literal {
             Int as i { return i.value.to_string() }
             Float as f { return f.value.to_string() }
             Char as c { return c.value.to_string() }
-            Str as s { return "\"" + s.value.clone() + "\"" }
+            Str as s { return s.value.clone() }
             Bool as b { return b.value.to_string() }
             Array as a {
                 String out = String.from("[")
