@@ -69,7 +69,6 @@ pub enum Stmt {
     If {
         Expr condition
         Vec<Stmt> then_branch
-        Vec<(Expr, Vec<Stmt>)> elif_branches
         Option<Vec<Stmt>> else_branch
     }
     Loop {
@@ -355,7 +354,6 @@ impl Stmt {
                 out += "If:\n"
                 guides.push(not is_last)
 
-                bool has_elif = i.elif_branches.len() > 0
                 bool has_else = i.else_branch.is_some()
 
                 // export condition
@@ -366,35 +364,11 @@ impl Stmt {
                 guides.pop()
 
                 // export then branch
-                out += prefix(guides, not has_elif and not has_else) + "Then:\n"
+                out += prefix(guides, not has_else) + "Then:\n"
 
-                guides.push(has_elif or has_else)
+                guides.push(has_else)
                 out += export_items(i.then_branch, guides)
                 guides.pop()
-
-                // export elif branches
-                for idx in 0..i.elif_branches.len() {
-                    bool elif_is_last = idx == i.elif_branches.len() - 1 and not has_else
-                    out += prefix(guides, elif_is_last) + "Elif:\n"
-
-                    guides.push(not elif_is_last)
-
-                    // export condition
-                    out += prefix(guides, false) + "Condition:\n"
-
-                    guides.push(true)
-                    out += i.elif_branches[idx][0].export(guides, true)
-                    guides.pop()
-
-                    // export body
-                    out += prefix(guides, true) + "Body:\n"
-
-                    guides.push(false)
-                    out += export_items(i.elif_branches[idx][1], guides)
-                    guides.pop()
-
-                    guides.pop()
-                }
 
                 // export else branch
                 if has_else {
