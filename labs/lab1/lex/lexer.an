@@ -29,12 +29,14 @@ emit_symbol(Vec<Token>* tokens, str sym, u64 line, u64 col) {
 // 辅助函数：根据单词文本生成对应的 TokenData.Kw 或 TokenData.Ident，并添加到 token 列表中
 emit_word(Vec<Token>* tokens, String text, u64 line, u64 col) {
 	str w = text.as_str()
-    // ========= TODO =========
-	// 调用 Keyword.from_word(w) 判断是否是关键字, 如果是则生成 Kw token, 否则生成 Ident token
-
-	push_token(tokens, TokenData.Ident(String.from("Dummy")), line, col)  // 这是一个示例，实际使用时请替换为正确的判断和输出
-
-    // ========================
+	match Keyword.from_word(w) {
+		Some as kw {
+			push_token(tokens, TokenData.Kw(kw.val), line, col)
+		}
+		None {
+			push_token(tokens, TokenData.Ident(String.from(w)), line, col)
+		}
+	}
 }
 
 // 核心函数：基于有限自动机的词法分析, 将源代码字符串转换为 token 列表
@@ -280,10 +282,8 @@ pub Vec<Token> tokenize(str source) {
 					buf.push(char(ch))
 					pos += 1
 				} else {
-                    // ========= TODO =========
-                    // 1. 调用 emit_word 来将 buf 中的文本作为一个单词 token 发出, 注意传入正确的行列信息
-					// 2. 清空 buf
-                    // ========= TODO =========
+					emit_word(&tokens, buf, tok_line, tok_col)
+					buf = String.new()
 					state = State.Start
 				}
 			}
@@ -295,11 +295,8 @@ pub Vec<Token> tokenize(str source) {
 					buf.push(char(ch))
 					pos += 1
 				} else {
-                    // ========= TODO =========
-					// 1. 调用 push_token 来将 buf 中的文本作为一个数字字面量 token 发出, 注意传入正确的行列信息
-					// 2. 注意使用 token.an 提供的工具函数
-					// 3. 清空 buf
-                    // ========= TODO =========
+					push_token(&tokens, TokenData.Lit(Literal.from_number_text(buf.as_str())), tok_line, tok_col)
+					buf = String.new()
 					state = State.Start
 				}
 			}
@@ -308,11 +305,8 @@ pub Vec<Token> tokenize(str source) {
             // 处理转义序列, 根据读取的文本生成一个字符串字面量 token, 最后回到 Start
 			InString {
 				if ch == b'"' {
-					// ========= TODO =========
-					// 1. 调用 push_token 来将 buf 中的文本作为一个字符串字面量 token 发出, 注意传入正确的行列信息
-					// 2. 注意使用 token.an 提供的工具函数
-					// 3. 清空 buf
-					// ========= TODO =========
+					push_token(&tokens, TokenData.Lit(Literal.from_string_text(buf.as_str())), tok_line, tok_col)
+					buf = String.new()
 					state = State.Start
 					pos += 1
 				} elif ch == b'\\' {
@@ -332,11 +326,8 @@ pub Vec<Token> tokenize(str source) {
             // 处理转义序列, 根据读取的文本生成一个字符字面量 token, 最后回到 Start
 			InChar {
 				if ch == b'\'' {
-					// ========= TODO =========
-					// 1. 调用 push_token 来将 buf 中的文本作为一个字符字面量 token 发出, 注意传入正确的行列信息
-					// 2. 注意使用 token.an 提供的工具函数
-					// 3. 清空 buf
-					// ========= TODO =========
+					push_token(&tokens, TokenData.Lit(Literal.from_char_text(buf.as_str())), tok_line, tok_col)
+					buf = String.new()
 					state = State.Start
 					pos += 1
 				} elif ch == b'\\' {
@@ -355,11 +346,13 @@ pub Vec<Token> tokenize(str source) {
 
         // 根据当前扫描位置更新行列信息
 		while old_pos < pos {
-            // ========= TODO =========
-            // 更新 line 和 col 以正确反映当前扫描位置
-            // 注意处理换行符 '\n'，它会增加 line 并重置 col
-            // 其他字符则增加 col
-            // ========= TODO =========
+			u8 c = bytes[old_pos]
+			if c == b'\n' {
+				line += 1
+				col = 1
+			} else {
+				col += 1
+			}
 			old_pos += 1
 		}
 	}
