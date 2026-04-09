@@ -699,6 +699,11 @@ class LLVMCtx:
 
         # For NPO payload variables, the receiver address is already the address of the val field.
         if receiver.symbol_id in self.__npo_payload_symbols:
+            # bitcast to the field type
+            receiver_addr.value = self.__def_info.builder.bitcast(
+                receiver_addr.value,
+                self.__ll_type.get_ll_type(self.__space.alloc_pointer(field.type_id)),
+            )  # type: ignore
             return LLValue(field.type_id, receiver_addr.value)
 
         field_addr = self.__def_info.builder.gep(
@@ -895,7 +900,7 @@ class LLVMCtx:
                 current_ptr = enum_addr.value
                 current_type_id = opt_type_id
 
-                for field_index in field_path:
+                for i, field_index in enumerate(field_path):
                     current_type = self.ty_get(current_type_id).expect_struct()
 
                     field_ptr = builder.gep(
@@ -913,7 +918,7 @@ class LLVMCtx:
                     substs = dict(zip(current_type.struct_def.generics, generic_args))
                     current_type_id = self.__space.instantiate(field.type_id, substs)
 
-                    if field_index == field_path[-1]:
+                    if i == len(field_path) - 1:
                         pointer_value = builder.load(field_ptr, name="optimizable.ptr")
                         return LLValue(current_type_id, pointer_value)
                     else:
