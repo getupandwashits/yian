@@ -16,7 +16,7 @@ $ pip install -r ./requirements.txt
 编译并运行一个示例程序 `hello.an`:
 
 ```bash
-$ scripts/yian_compiler.py lab/test_cases/hello.an
+$ scripts/yian_compiler.py labs/lab1/test_cases/hello.an
 ```
 
 可执行文件生成在 `tests/yian_workspace/bin/out`, 执行:
@@ -37,4 +37,4 @@ Hello, World!
 
 - 高亮插件目录: `ide-support`, 包含了适用于VSCode的语法高亮插件, 右键安装
 - 语法文档: `docs/grammar`, 用于快速上手yian语言的语法规则
-- lab目录: `lab`
+- labs目录: `labs`, 包含 lab1, lab2 等
