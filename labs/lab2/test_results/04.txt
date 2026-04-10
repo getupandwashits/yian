@@ -1,0 +1,308 @@
+=== Parser Output ===
+Program
+└── FuncDef: main() -> i32
+    ├── VarDecl: i32 a
+    │   └── Initializer:
+    │       └── BinaryOp: -
+    │           ├── BinaryOp: +
+    │           │   ├── Literal: 8
+    │           │   └── BinaryOp: *
+    │           │       ├── Literal: 5
+    │           │       └── Literal: 2
+    │           └── Literal: 3
+    ├── VarDecl: i32 b
+    │   └── Initializer:
+    │       └── BinaryOp: *
+    │           ├── BinaryOp: +
+    │           │   ├── Literal: 8
+    │           │   └── Literal: 5
+    │           └── BinaryOp: -
+    │               ├── Literal: 2
+    │               └── Literal: 3
+    ├── VarDecl: i32 res1
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res1
+    │       └── UnaryOp: -
+    │           └── Identifier: a
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res1
+    │       └── BinaryOp: +
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res1
+    │       └── BinaryOp: -
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res1
+    │       └── BinaryOp: *
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res1
+    │       └── BinaryOp: /
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res1
+    │       └── BinaryOp: %
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: +=
+    │       ├── Identifier: res1
+    │       └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: -=
+    │       ├── Identifier: res1
+    │       └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: *=
+    │       ├── Identifier: res1
+    │       └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: /=
+    │       ├── Identifier: res1
+    │       └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: %=
+    │       ├── Identifier: res1
+    │       └── Identifier: b
+    ├── VarDecl: bool res2
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res2
+    │       └── BinaryOp: ==
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res2
+    │       └── BinaryOp: !=
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res2
+    │       └── BinaryOp: <
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res2
+    │       └── BinaryOp: <=
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res2
+    │       └── BinaryOp: >
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res2
+    │       └── BinaryOp: >=
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── VarDecl: bool res3
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res3
+    │       └── BinaryOp: and
+    │           ├── BinaryOp: >
+    │           │   ├── Identifier: a
+    │           │   └── Identifier: b
+    │           └── BinaryOp: >
+    │               ├── Identifier: b
+    │               └── Literal: 0
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res3
+    │       └── BinaryOp: or
+    │           ├── BinaryOp: >
+    │           │   ├── Identifier: a
+    │           │   └── Identifier: b
+    │           └── BinaryOp: >
+    │               ├── Identifier: b
+    │               └── Literal: 0
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res3
+    │       └── UnaryOp: not
+    │           └── BinaryOp: >
+    │               ├── Identifier: a
+    │               └── Identifier: b
+    ├── VarDecl: i32 res4
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res4
+    │       └── BinaryOp: &
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res4
+    │       └── BinaryOp: |
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res4
+    │       └── BinaryOp: ^
+    │           ├── Identifier: a
+    │           └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res4
+    │       └── UnaryOp: ~
+    │           └── Identifier: a
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res4
+    │       └── BinaryOp: <<
+    │           ├── Identifier: a
+    │           └── Literal: 2
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: res4
+    │       └── BinaryOp: >>
+    │           ├── Identifier: a
+    │           └── Literal: 2
+    ├── ExprStmt:
+    │   └── BinaryOp: &=
+    │       ├── Identifier: res4
+    │       └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: |=
+    │       ├── Identifier: res4
+    │       └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: ^=
+    │       ├── Identifier: res4
+    │       └── Identifier: b
+    ├── ExprStmt:
+    │   └── BinaryOp: <<=
+    │       ├── Identifier: res4
+    │       └── Literal: 2
+    ├── ExprStmt:
+    │   └── BinaryOp: >>=
+    │       ├── Identifier: res4
+    │       └── Literal: 2
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: a
+    │       └── BinaryOp: =
+    │           ├── Identifier: b
+    │           └── Literal: 0
+    ├── VarDecl: i32 p1
+    │   └── Initializer:
+    │       └── BinaryOp: +
+    │           ├── Literal: 2
+    │           └── BinaryOp: *
+    │               ├── Literal: 3
+    │               └── Literal: 4
+    ├── VarDecl: i32 p2
+    │   └── Initializer:
+    │       └── BinaryOp: *
+    │           ├── BinaryOp: +
+    │           │   ├── Literal: 2
+    │           │   └── Literal: 3
+    │           └── Literal: 4
+    ├── VarDecl: i32 p3
+    │   └── Initializer:
+    │       └── BinaryOp: *
+    │           ├── BinaryOp: /
+    │           │   ├── Literal: 20
+    │           │   └── Literal: 5
+    │           └── Literal: 2
+    ├── VarDecl: i32 p4
+    │   └── Initializer:
+    │       └── BinaryOp: -
+    │           ├── BinaryOp: -
+    │           │   ├── Literal: 20
+    │           │   └── Literal: 5
+    │           └── Literal: 3
+    ├── VarDecl: bool p5
+    │   └── Initializer:
+    │       └── BinaryOp: ==
+    │           ├── BinaryOp: +
+    │           │   ├── Literal: 1
+    │           │   └── BinaryOp: *
+    │           │       ├── Literal: 2
+    │           │       └── Literal: 3
+    │           └── Literal: 7
+    ├── VarDecl: bool p6
+    │   └── Initializer:
+    │       └── UnaryOp: not
+    │           └── BinaryOp: ==
+    │               ├── BinaryOp: +
+    │               │   ├── Literal: 1
+    │               │   └── BinaryOp: *
+    │               │       ├── Literal: 2
+    │               │       └── Literal: 3
+    │               └── Literal: 8
+    ├── VarDecl: bool p7
+    │   └── Initializer:
+    │       └── BinaryOp: or
+    │           ├── BinaryOp: and
+    │           │   ├── BinaryOp: <
+    │           │   │   ├── Literal: 1
+    │           │   │   └── Literal: 2
+    │           │   └── BinaryOp: <
+    │           │       ├── Literal: 3
+    │           │       └── Literal: 4
+    │           └── Literal: false
+    ├── VarDecl: i32 p8
+    │   └── Initializer:
+    │       └── BinaryOp: <<
+    │           ├── BinaryOp: +
+    │           │   ├── Literal: 1
+    │           │   └── Literal: 2
+    │           └── Literal: 1
+    ├── VarDecl: i32 p9
+    │   └── Initializer:
+    │       └── BinaryOp: +
+    │           ├── Literal: 1
+    │           └── BinaryOp: <<
+    │               ├── Literal: 2
+    │               └── Literal: 1
+    ├── VarDecl: i32 p10
+    │   └── Initializer:
+    │       └── BinaryOp: >>
+    │           ├── Literal: 8
+    │           └── BinaryOp: +
+    │               ├── Literal: 1
+    │               └── Literal: 1
+    ├── VarDecl: bool p11
+    │   └── Initializer:
+    │       └── BinaryOp: or
+    │           ├── BinaryOp: and
+    │           │   ├── BinaryOp: ==
+    │           │   │   ├── Literal: 1
+    │           │   │   └── Literal: 1
+    │           │   └── BinaryOp: ==
+    │           │       ├── Literal: 0
+    │           │       └── Literal: 1
+    │           └── Literal: true
+    ├── VarDecl: i32 p12
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── Identifier: p12
+    │       └── Literal: 9
+    ├── ExprStmt:
+    │   └── BinaryOp: +=
+    │       ├── Identifier: p12
+    │       └── BinaryOp: *
+    │           ├── Literal: 3
+    │           └── Literal: 2
+    └── Return:
+        └── Value:
+            └── Literal: 0

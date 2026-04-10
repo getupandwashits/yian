@@ -1,0 +1,22 @@
+// Focus: basic types
+
+i32 main() {
+    let a: i8 = 42;
+    let b: i16 = 1000;
+    let c: i32 = 100000;
+    let d: i64 = 10000000000;
+
+    let e: u8 = 255;
+    let f: u16 = 65535;
+    let g: u32 = 4294967295;
+    let h: u64 = 18446744073709551615;
+
+    let i: f32 = 3.14;
+    let j: f64 = 2.718281828459045;
+
+    let k: char = 'A';
+    let l: bool = true;
+    let m: str = "Hello, Yian!\n";
+
+    return 0;
+}

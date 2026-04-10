@@ -165,7 +165,7 @@ impl Expr {
                 out += "\n"
             }
             Binary as b {
-                out += "BinaryOp: op = "
+                out += "BinaryOp: "
                 out += b.op.to_string()
                 out += "\n"
 
@@ -173,7 +173,7 @@ impl Expr {
                 out += b.right.export(guides, true)
             }
             Unary as u {
-                out += "UnaryOp: op = "
+                out += "UnaryOp: "
                 out += u.op.to_string()
                 out += "\n"
 

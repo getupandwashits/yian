@@ -1,0 +1,17 @@
+// Focus: struct and struct constructor
+
+struct Box2D {
+    i32 w
+    i32 h
+}
+
+i32 area(Box2D b) {
+    return b.w * b.h;
+}
+
+i32 main() {
+    let b: Box2D = Box2D(3, 7);
+    let a: i32 = area(b);
+
+    return 0;
+}

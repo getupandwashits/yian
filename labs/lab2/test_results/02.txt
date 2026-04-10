@@ -1,0 +1,44 @@
+=== Parser Output ===
+Program
+├── FuncDef: factorial(i32 n) -> i32
+│   ├── If:
+│   │   ├── Condition:
+│   │   │   └── BinaryOp: <=
+│   │   │       ├── Identifier: n
+│   │   │       └── Literal: 1
+│   │   └── Then:
+│   │       └── Return:
+│   │           └── Value:
+│   │               └── Literal: 1
+│   └── Return:
+│       └── Value:
+│           └── BinaryOp: *
+│               ├── Identifier: n
+│               └── Call: callee = factorial
+│                   └── BinaryOp: -
+│                       ├── Identifier: n
+│                       └── Literal: 1
+├── FuncDef: is_odd(i32 n) -> bool
+│   └── Return:
+│       └── Value:
+│           └── BinaryOp: ==
+│               ├── BinaryOp: %
+│               │   ├── Identifier: n
+│               │   └── Literal: 2
+│               └── Literal: 1
+└── FuncDef: main() -> i32
+    ├── VarDecl: i32 f
+    │   └── Initializer:
+    │       └── Call: callee = factorial
+    │           └── Literal: 6
+    ├── VarDecl: bool odd
+    │   └── Initializer:
+    │       └── Call: callee = is_odd
+    │           └── Literal: 9
+    ├── VarDecl: bool even
+    │   └── Initializer:
+    │       └── Call: callee = is_odd
+    │           └── Literal: 8
+    └── Return:
+        └── Value:
+            └── Literal: 0

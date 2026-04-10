@@ -1,0 +1,126 @@
+=== Parser Output ===
+Program
+└── FuncDef: main() -> i32
+    ├── VarDecl: i32[6] arr
+    │   └── Initializer:
+    │       └── Literal: [1, 2, 3, 4, 5, 6]
+    ├── VarDecl: i32 s1
+    │   └── Initializer:
+    │       └── BinaryOp: +
+    │           ├── BinaryOp: []
+    │           │   ├── Identifier: arr
+    │           │   └── Literal: 0
+    │           └── BinaryOp: []
+    │               ├── Identifier: arr
+    │               └── Literal: 5
+    ├── For:
+    │   ├── Init:
+    │   │   └── VarDecl: i32 i
+    │   │       └── Initializer:
+    │   │           └── Literal: 1
+    │   ├── Condition:
+    │   │   └── BinaryOp: <
+    │   │       ├── Identifier: i
+    │   │       └── Literal: 5
+    │   ├── Update:
+    │   │   └── BinaryOp: +=
+    │   │       ├── Identifier: i
+    │   │       └── Literal: 1
+    │   └── Body:
+    │       └── ExprStmt:
+    │           └── BinaryOp: +=
+    │               ├── Identifier: s1
+    │               └── BinaryOp: []
+    │                   ├── Identifier: arr
+    │                   └── Identifier: i
+    ├── VarDecl: i32 var
+    │   └── Initializer:
+    │       └── Literal: 42
+    ├── VarDecl: i32* p
+    │   └── Initializer:
+    │       └── UnaryOp: &
+    │           └── Identifier: var
+    ├── VarDecl: i32 s2
+    │   └── Initializer:
+    │       └── BinaryOp: +
+    │           ├── UnaryOp: *
+    │           │   └── Identifier: p
+    │           └── Literal: 1
+    ├── ExprStmt:
+    │   └── BinaryOp: +=
+    │       ├── UnaryOp: *
+    │       │   └── Identifier: p
+    │       └── Literal: 1
+    ├── VarDecl: i32* begin
+    │   └── Initializer:
+    │       └── UnaryOp: &
+    │           └── BinaryOp: []
+    │               ├── Identifier: arr
+    │               └── Literal: 0
+    ├── VarDecl: i32* end
+    │   └── Initializer:
+    │       └── BinaryOp: +
+    │           ├── UnaryOp: &
+    │           │   └── BinaryOp: []
+    │           │       ├── Identifier: arr
+    │           │       └── Literal: 5
+    │           └── Literal: 1
+    ├── VarDecl: i32 s3
+    │   └── Initializer:
+    │       └── Literal: 0
+    ├── For:
+    │   ├── Init:
+    │   │   └── VarDecl: i32* p
+    │   │       └── Initializer:
+    │   │           └── Identifier: begin
+    │   ├── Condition:
+    │   │   └── BinaryOp: <
+    │   │       ├── Identifier: p
+    │   │       └── Identifier: end
+    │   ├── Update:
+    │   │   └── BinaryOp: +=
+    │   │       ├── Identifier: p
+    │   │       └── Literal: 1
+    │   └── Body:
+    │       └── ExprStmt:
+    │           └── BinaryOp: +=
+    │               ├── Identifier: s3
+    │               └── UnaryOp: *
+    │                   └── Identifier: p
+    ├── VarDecl: i32* heap_obj1
+    │   └── Initializer:
+    │       └── Dyn: type = i32
+    ├── VarDecl: i32* heap_obj2
+    │   └── Initializer:
+    │       └── Dyn: type = i32
+    │           └── Literal: 3
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── UnaryOp: *
+    │       │   └── Identifier: heap_obj1
+    │       └── Literal: 100
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── BinaryOp: []
+    │       │   ├── Identifier: heap_obj2
+    │       │   └── Literal: 0
+    │       └── Literal: 10
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── BinaryOp: []
+    │       │   ├── Identifier: heap_obj2
+    │       │   └── Literal: 1
+    │       └── Literal: 20
+    ├── ExprStmt:
+    │   └── BinaryOp: =
+    │       ├── BinaryOp: []
+    │       │   ├── Identifier: heap_obj2
+    │       │   └── Literal: 2
+    │       └── Literal: 30
+    ├── Delete:
+    │   └── Identifier: heap_obj1
+    ├── Delete:
+    │   └── Identifier: heap_obj2
+    └── Return:
+        └── Value:
+            └── Literal: 0

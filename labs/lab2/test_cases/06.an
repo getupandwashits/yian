@@ -1,0 +1,33 @@
+// Focus: types: array and pointer
+
+i32 main() {
+    let arr: i32[6] = [1, 2, 3, 4, 5, 6];
+    let s1: i32 = arr[0] + arr[5];
+    for let i: i32 = 1; i < 5; i += 1 {
+        s1 += arr[i];
+    }
+
+    let var: i32 = 42;
+    let p: i32* = &var;
+    let s2: i32 = *p + 1;
+    *p += 1;
+
+    let begin: i32* = &arr[0];
+    let end: i32* = &arr[5] + 1;
+    let s3: i32 = 0;
+    for let p: i32* = begin; p < end; p += 1 {
+        s3 += *p;
+    }
+
+    let heap_obj1: i32* = dyn i32;
+    let heap_obj2: i32* = dyn i32[3];
+    *heap_obj1 = 100;
+    heap_obj2[0] = 10;
+    heap_obj2[1] = 20;
+    heap_obj2[2] = 30;
+
+    del heap_obj1;
+    del heap_obj2;
+
+    return 0;
+}
