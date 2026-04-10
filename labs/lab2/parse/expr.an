@@ -8,7 +8,7 @@ from token import Keyword, Token
 
 pub enum Expr {
     Lit { Literal lit }
-    Ident { String name }  // Variable or Enum
+    Ident { String name }
     Binary {
         Expr* left
         BinaryOp op
