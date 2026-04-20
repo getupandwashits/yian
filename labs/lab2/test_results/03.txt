@@ -1,0 +1,24 @@
+=== Parser Output ===
+Program
+├── StructDef: Box2D{i32 w, i32 h}
+├── FuncDef: area(Box2D b) -> i32
+│   └── Return:
+│       └── Value:
+│           └── BinaryOp: *
+│               ├── FieldAccess: field = w
+│               │   └── Identifier: b
+│               └── FieldAccess: field = h
+│                   └── Identifier: b
+└── FuncDef: main() -> i32
+    ├── VarDecl: Box2D b
+    │   └── Initializer:
+    │       └── Call: callee = Box2D
+    │           ├── Literal: 3
+    │           └── Literal: 7
+    ├── VarDecl: i32 a
+    │   └── Initializer:
+    │       └── Call: callee = area
+    │           └── Identifier: b
+    └── Return:
+        └── Value:
+            └── Literal: 0

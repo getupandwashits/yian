@@ -301,7 +301,7 @@ class MethodRegistry:
                 )
 
         raise SemanticError(
-            f"Method '{method_name}' not found for {caller}(type: {self.__space.get_name(caller.type_id)}) or any of its dereferenced types."
+            f"Method '{method_name}' not found for {caller} or any of its dereferenced types."
         )
 
     def static_method_lookup(

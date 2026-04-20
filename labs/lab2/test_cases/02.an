@@ -1,0 +1,20 @@
+// Focus: function declaration, call and return
+
+i32 factorial(i32 n) {
+    if n <= 1 {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+bool is_odd(i32 n) {
+    return n % 2 == 1;
+}
+
+i32 main() {
+    let f: i32 = factorial(6);
+    let odd: bool = is_odd(9);
+    let even: bool = is_odd(8);
+
+    return 0;
+}

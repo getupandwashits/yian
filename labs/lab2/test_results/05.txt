@@ -1,0 +1,110 @@
+=== Parser Output ===
+Program
+├── EnumDef: Grade{A, B, C, F}
+├── FuncDef: score(Grade g) -> i32
+│   └── Match:
+│       ├── Value:
+│       │   └── Identifier: g
+│       └── Arms:
+│           ├── Arm: A
+│           │   └── Return:
+│           │       └── Value:
+│           │           └── Literal: 4
+│           ├── Arm: B
+│           │   └── Return:
+│           │       └── Value:
+│           │           └── Literal: 3
+│           ├── Arm: C
+│           │   └── Return:
+│           │       └── Value:
+│           │           └── Literal: 2
+│           └── Arm: F
+│               └── Return:
+│                   └── Value:
+│                       └── Literal: 0
+└── FuncDef: main() -> i32
+    ├── VarDecl: i32 n
+    │   └── Initializer:
+    │       └── Literal: 0
+    ├── VarDecl: i32 sum_odd
+    │   └── Initializer:
+    │       └── Literal: 0
+    ├── Loop:
+    │   └── Body:
+    │       ├── If:
+    │       │   ├── Condition:
+    │       │   │   └── BinaryOp: >=
+    │       │   │       ├── Identifier: n
+    │       │   │       └── Literal: 10
+    │       │   ├── Then:
+    │       │   │   └── Break
+    │       │   └── Else:
+    │       │       └── ExprStmt:
+    │       │           └── BinaryOp: +=
+    │       │               ├── Identifier: n
+    │       │               └── Literal: 1
+    │       ├── If:
+    │       │   ├── Condition:
+    │       │   │   └── BinaryOp: ==
+    │       │   │       ├── BinaryOp: %
+    │       │   │       │   ├── Identifier: n
+    │       │   │       │   └── Literal: 2
+    │       │   │       └── Literal: 0
+    │       │   └── Then:
+    │       │       └── Continue
+    │       └── ExprStmt:
+    │           └── BinaryOp: +=
+    │               ├── Identifier: sum_odd
+    │               └── Identifier: n
+    ├── VarDecl: i32 k
+    │   └── Initializer:
+    │       └── Literal: 1
+    ├── VarDecl: i32 sum_all
+    │   └── Initializer:
+    │       └── Literal: 0
+    ├── While:
+    │   ├── Condition:
+    │   │   └── BinaryOp: <=
+    │   │       ├── Identifier: k
+    │   │       └── Literal: 5
+    │   └── Body:
+    │       ├── ExprStmt:
+    │       │   └── BinaryOp: +=
+    │       │       ├── Identifier: sum_all
+    │       │       └── Identifier: k
+    │       └── ExprStmt:
+    │           └── BinaryOp: +=
+    │               ├── Identifier: k
+    │               └── Literal: 1
+    ├── VarDecl: i32 sum_for
+    │   └── Initializer:
+    │       └── Literal: 0
+    ├── For:
+    │   ├── Init:
+    │   │   └── VarDecl: i32 i
+    │   │       └── Initializer:
+    │   │           └── Literal: 1
+    │   ├── Condition:
+    │   │   └── BinaryOp: <=
+    │   │       ├── Identifier: i
+    │   │       └── Literal: 5
+    │   ├── Update:
+    │   │   └── BinaryOp: +=
+    │   │       ├── Identifier: i
+    │   │       └── Literal: 1
+    │   └── Body:
+    │       └── ExprStmt:
+    │           └── BinaryOp: +=
+    │               ├── Identifier: sum_for
+    │               └── Identifier: i
+    ├── VarDecl: Grade g
+    │   └── Initializer:
+    │       └── FieldAccess: field = B
+    │           └── Identifier: Grade
+    ├── VarDecl: i32 s
+    │   └── Initializer:
+    │       └── Call: callee = score
+    │           └── Identifier: g
+    └── Return:
+        └── Value:
+            └── Literal: 0

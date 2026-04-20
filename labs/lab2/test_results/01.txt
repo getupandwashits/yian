@@ -1,0 +1,45 @@
+=== Parser Output ===
+Program
+└── FuncDef: main() -> i32
+    ├── VarDecl: i8 a
+    │   └── Initializer:
+    │       └── Literal: 42
+    ├── VarDecl: i16 b
+    │   └── Initializer:
+    │       └── Literal: 1000
+    ├── VarDecl: i32 c
+    │   └── Initializer:
+    │       └── Literal: 100000
+    ├── VarDecl: i64 d
+    │   └── Initializer:
+    │       └── Literal: 10000000000
+    ├── VarDecl: u8 e
+    │   └── Initializer:
+    │       └── Literal: 255
+    ├── VarDecl: u16 f
+    │   └── Initializer:
+    │       └── Literal: 65535
+    ├── VarDecl: u32 g
+    │   └── Initializer:
+    │       └── Literal: 4294967295
+    ├── VarDecl: u64 h
+    │   └── Initializer:
+    │       └── Literal: 18446744073709551615
+    ├── VarDecl: f32 i
+    │   └── Initializer:
+    │       └── Literal: 3.140000
+    ├── VarDecl: f64 j
+    │   └── Initializer:
+    │       └── Literal: 2.718281
+    ├── VarDecl: char k
+    │   └── Initializer:
+    │       └── Literal: A
+    ├── VarDecl: bool l
+    │   └── Initializer:
+    │       └── Literal: true
+    ├── VarDecl: str m
+    │   └── Initializer:
+    │       └── Literal: Hello, Yian!\n
+    └── Return:
+        └── Value:
+            └── Literal: 0

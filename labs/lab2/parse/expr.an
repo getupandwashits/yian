@@ -8,7 +8,7 @@ from token import Keyword, Token
 
 pub enum Expr {
     Lit { Literal lit }
-    Ident { String name }  // Variable or Enum
+    Ident { String name }
     Binary {
         Expr* left
         BinaryOp op
@@ -65,10 +65,7 @@ impl Literal {
                 match t.lit {
                     Int as n { return Literal.Int(n.value) }
                     Float as n { return Literal.Float(n.value) }
-                    Char as n {
-                        char value = n.text.chars().next().unwrap()
-                        return Literal.Char(value)
-                    }
+                    Char as n { return Literal.Char(n.ch) }
                     Str as n { return Literal.Str(n.text.clone()) }
                     _ { panic("Unexpected literal token") }
                 }
@@ -136,7 +133,7 @@ impl ToString for Literal {
             Int as i { return i.value.to_string() }
             Float as f { return f.value.to_string() }
             Char as c { return c.value.to_string() }
-            Str as s { return "\"" + s.value.clone() + "\"" }
+            Str as s { return s.value.clone() }
             Bool as b { return b.value.to_string() }
             Array as a {
                 String out = String.from("[")

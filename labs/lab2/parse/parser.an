@@ -1,0 +1,660 @@
+from std.core.vec import Vec
+from std.core.option import Option
+from std.core.string import String
+from std.core.io import print
+
+from ast import Program, ProgramItem, ASTType, VarInfo, StructDef, EnumDef, FuncDef, Stmt, Pattern
+from expr import Expr, Literal, BinaryOp, UnaryOp, InfixInfo
+from token import Token, Keyword
+
+pub struct Parser {
+    Vec<Token> tokens
+    u64 pos
+}
+
+impl Parser {
+    static pub Self new(Vec<Token> tokens) {
+        return Self(tokens, 0)
+    }
+
+    // 主函数: 解析整个程序，返回一个 AST
+    pub Program parse() {
+        Vec<ProgramItem> items = Vec<ProgramItem>.new()
+
+        while not self.peek().is_eof() {
+            Token token = self.peek()
+            if token.is_keyword(Keyword.Struct) {
+                items.push(ProgramItem.Struct(self.parse_struct_def()))
+            } elif token.is_keyword(Keyword.Enum) {
+                items.push(ProgramItem.Enum(self.parse_enum_def()))
+            } else {
+                items.push(ProgramItem.Func(self.parse_func_def()))
+            }
+        }
+
+        return Program(items)
+    }
+
+    // 辅助函数: 错误处理的 token
+    error(Token token) {
+        print("Unexpected token: ")
+        print(token.to_string().as_str())
+        print("\n")
+        panic("Parsing error")
+    }
+
+    // 辅助函数: 预览当前 token，不消费它
+    Token peek() {
+        return self.tokens[self.pos]
+    }
+
+    // 辅助函数: 预览后面的第 n 个 token，不消费它
+    Token peek_n(u64 n) {
+        return self.tokens[self.pos + n]
+    }
+
+    // 辅助函数: 消费当前 token 并返回它
+    Token next() {
+        Token token = self.tokens[self.pos]
+        self.pos += 1
+        return token
+    }
+
+    // 辅助函数: 消费一个特定的关键字，如果下一个 token 不是这个关键字则报错
+    consume_keyword(Keyword kw) {
+        Token token = self.next()
+        match token.data {
+            Kw as t {
+                if t.kw == kw {
+                    return
+                }
+            }
+            _ {}
+        }
+        self.error(token)
+    }
+
+    // 辅助函数: 解析一个标识符，返回它的名字
+    String parse_ident() {
+        Token token = self.next()
+        match token.data {
+            Ident as t {
+                return t.name
+            }
+            _ {}
+        }
+        self.error(token)
+
+        // Unreachable
+        return String.new()
+    }
+
+    // 辅助函数: 解析一个基本类型，返回一个 ASTType
+    ASTType parse_base_type() {
+        Token token = self.next()
+        match token.data {
+            Kw as t {
+                match t.kw {
+                    I8 { return ASTType.I8 }
+                    I16 { return ASTType.I16 }
+                    I32 { return ASTType.I32 }
+                    I64 { return ASTType.I64 }
+                    U8 { return ASTType.U8 }
+                    U16 { return ASTType.U16 }
+                    U32 { return ASTType.U32 }
+                    U64 { return ASTType.U64 }
+                    F32 { return ASTType.F32 }
+                    F64 { return ASTType.F64 }
+                    Char { return ASTType.Char }
+                    Bool { return ASTType.Bool }
+                    Str { return ASTType.Str }
+                    Void { return ASTType.Void }
+                    _ { self.error(token) }
+                }
+            }
+            Ident as t {
+                return ASTType.Custom(t.name)
+            }
+            _ { self.error(token) }
+        }
+
+        // Unreachable
+        return ASTType.Void
+    }
+
+    // 辅助函数: 解析一个类型，支持数组和指针类型
+    ASTType parse_type() {
+        ASTType base_type = self.parse_base_type()
+
+        // Handle array and pointer types
+        loop {
+            if self.peek().is_keyword(Keyword.LBracket) {
+                // Array type
+                self.consume_keyword(Keyword.LBracket)
+                u64 length = self.parse_integer()
+                self.consume_keyword(Keyword.RBracket)
+
+                // Update base_type to be an array of the current base_type
+                ASTType* pointee = dyn ASTType
+                *pointee = base_type
+                base_type = ASTType.Array(pointee, length)
+            } elif self.peek().is_keyword(Keyword.Star) {
+                // Pointer type
+                self.consume_keyword(Keyword.Star)
+
+                // Update base_type to be a pointer to the current base_type
+                ASTType* pointee = dyn ASTType
+                *pointee = base_type
+                base_type = ASTType.Pointer(pointee)
+            } else {
+                break
+            }
+        }
+
+        return base_type
+    }
+
+    // 辅助函数: 解析一个整数字面量，返回它的值
+    u64 parse_integer() {
+        Token token = self.next()
+        match token.data {
+            Lit as t {
+                match t.lit {
+                    Int as _i { return _i.value }
+                    _ {}
+                }
+            }
+            _ {}
+        }
+        self.error(token)
+
+        // Unreachable
+        return 0
+    }
+
+    // 辅助函数: 解析一个模式，返回一个 Pattern
+    Pattern parse_pattern() {
+        if self.peek().is_keyword(Keyword.Minus) {
+            Token value_token = self.peek_n(1)
+            match value_token.data {
+                Lit as lit {
+                    match lit.lit {
+                        Int as n {
+                            self.next()
+                            self.next()
+                            return Pattern.Int(-i64(n.value))
+                        }
+                        _ { self.error(value_token) }
+                    }
+                }
+                _ { self.error(value_token) }
+            }
+        }
+
+        Token token = self.next()
+        match token.data {
+            Ident as t { return Pattern.Ident(t.name) }
+            Lit as t {
+                match t.lit {
+                    Int as n { return Pattern.Int(i64(n.value)) }
+                    Char as n {
+                        return Pattern.Char(n.ch)
+                    }
+                    _ { self.error(token) }
+                }
+            }
+            _ { self.error(token) }
+        }
+
+        // Unreachable
+        return Pattern.Wildcard
+    }
+
+    StructDef parse_struct_def() {
+        // consume 'struct'
+        self.consume_keyword(Keyword.Struct)
+
+        // parse struct name
+        String name = self.parse_ident()
+
+        // consume '{'
+        self.consume_keyword(Keyword.LBrace)
+
+        Vec<VarInfo> fields = Vec<VarInfo>.new()
+
+        // parse fields
+        while not self.peek().is_keyword(Keyword.RBrace) {
+            ASTType field_type = self.parse_type()
+            String field_name = self.parse_ident()
+            fields.push(VarInfo(field_name, field_type))
+        }
+
+        // consume '}'
+        self.consume_keyword(Keyword.RBrace)
+
+        return StructDef(name, fields)
+    }
+
+    EnumDef parse_enum_def() {
+        // consume 'enum'
+        // TODO: 参考 parse_struct_def
+
+        // parse enum name
+        // TODO: 参考 parse_struct_def
+
+        // consume '{'
+        // TODO: 参考 parse_struct_def
+
+        Vec<String> variants = Vec<String>.new()
+
+        // parse variants
+        // TODO: 参考 parse_struct_def，注意 enum 的每个 variant 只有名字没有类型
+
+        // consume '}'
+        // TODO: 参考 parse_struct_def
+
+        return EnumDef(name, variants)
+    }
+
+    FuncDef parse_func_def() {
+        // parse return type
+        ASTType return_type = self.parse_type()
+
+        // parse function name
+        String name = self.parse_ident()
+
+        // consume '('
+        self.consume_keyword(Keyword.LParen)
+
+        Vec<VarInfo> params = Vec<VarInfo>.new()
+
+        // parse parameters
+        while not self.peek().is_keyword(Keyword.RParen) {
+            ASTType param_type = self.parse_type()
+            String param_name = self.parse_ident()
+            params.push(VarInfo(param_name, param_type))
+
+            if self.peek().is_keyword(Keyword.Comma) {
+                self.consume_keyword(Keyword.Comma)
+            } else {
+                break
+            }
+        }
+
+        // consume ')'
+        self.consume_keyword(Keyword.RParen)
+
+        Vec<Stmt> body = self.parse_braced_stmt_block()
+
+        return FuncDef(name, params, return_type, body)
+    }
+
+    Stmt parse_stmt() {
+        Token token = self.peek()
+        match token.data {
+            Kw as t {
+                match t.kw {
+                    Let { return self.parse_var_decl() }
+                    Del { return self.parse_del() }
+                    If { return self.parse_if() }
+                    Loop { return self.parse_loop() }
+                    While { return self.parse_while() }
+                    For { return self.parse_for() }
+                    Match { return self.parse_match() }
+                    Return { return self.parse_return() }
+                    Break { return self.parse_break() }
+                    Continue { return self.parse_continue() }
+                    _ {}
+                }
+            }
+            _ {}
+        }
+
+        return self.parse_expr_stmt()
+    }
+
+    Vec<Stmt> parse_braced_stmt_block() {
+        self.consume_keyword(Keyword.LBrace)
+
+        Vec<Stmt> body = Vec<Stmt>.new()
+        while not self.peek().is_keyword(Keyword.RBrace) {
+            body.push(self.parse_stmt())
+        }
+
+        self.consume_keyword(Keyword.RBrace)
+        return body
+    }
+
+    Stmt parse_var_decl() {
+        // consume 'let'
+        self.consume_keyword(Keyword.Let)
+
+        // parse variable name
+        // TODO: name 变量用于存储变量名
+
+        // consume ':'
+        self.consume_keyword(Keyword.Colon)
+
+        // parse variable type
+        // TODO:: type 变量用于存储变量类型
+
+        Option<Expr> init = Option<Expr>.None
+
+        // TODO: 如果有 '=', 解析初始化表达式并更新 init 变量
+
+        // consume ';'
+        self.consume_keyword(Keyword.Semicolon)
+
+        return Stmt.VarDecl(VarInfo(name, type), init)
+    }
+
+    Stmt parse_del() {
+        // consume 'del'
+        self.consume_keyword(Keyword.Del)
+
+        // parse target expression
+        Expr target = self.parse_expr()
+
+        // consume ';'
+        self.consume_keyword(Keyword.Semicolon)
+
+        return Stmt.Delete(target)
+    }
+
+    Stmt parse_if() {
+        // consume 'if'
+        self.consume_keyword(Keyword.If)
+
+        // parse condition
+        Expr condition = self.parse_expr()
+
+        Vec<Stmt> then_branch = self.parse_braced_stmt_block()
+        Option<Vec<Stmt>> else_branch = Option<Vec<Stmt>>.None
+
+        // parse else / else if branch
+        if self.peek().is_keyword(Keyword.Else) {
+            self.consume_keyword(Keyword.Else)
+
+            if self.peek().is_keyword(Keyword.If) {
+                // else if is represented as else { if ... }
+                Vec<Stmt> else_body = Vec<Stmt>.new()
+                else_body.push(self.parse_if())
+                else_branch = Option<Vec<Stmt>>.Some(else_body)
+            } else {
+                // parse else branch
+                Vec<Stmt> else_body = self.parse_braced_stmt_block()
+                else_branch = Option<Vec<Stmt>>.Some(else_body)
+            }
+        }
+
+        return Stmt.If(condition, then_branch, else_branch)
+    }
+
+    Stmt parse_loop() {
+        // consume 'loop'
+        self.consume_keyword(Keyword.Loop)
+
+        Vec<Stmt> body = self.parse_braced_stmt_block()
+
+        return Stmt.Loop(body)
+    }
+
+    Stmt parse_while() {
+        // consume 'while'
+        self.consume_keyword(Keyword.While)
+
+        // parse condition
+        Expr condition = self.parse_expr()
+
+        Vec<Stmt> body = self.parse_braced_stmt_block()
+
+        return Stmt.While(condition, body)
+    }
+
+    Stmt parse_for() {
+        // consume 'for'
+        self.consume_keyword(Keyword.For)
+
+        Option<Stmt*> init = Option<Stmt*>.None
+        Option<Expr> condition = Option<Expr>.None
+        Option<Expr> update = Option<Expr>.None
+
+        // TODO: 如果下一个 token 不是 ';'，解析初始化语句并更新 init 变量, 注意 parse_stmt() 会消费 ';'
+
+        if not self.peek().is_keyword(Keyword.Semicolon) {
+            condition = Option<Expr>.Some(self.parse_expr())
+        }
+
+        // consume ';'
+        self.consume_keyword(Keyword.Semicolon)
+
+        // TODO: 如果下一个 token 不是 '{'，解析更新表达式并更新 update 变量
+
+        // TODO: 解析循环体, 存储在 body 变量中
+
+        return Stmt.For(init, condition, update, body)
+    }
+
+    Stmt parse_match() {
+        // consume 'match'
+        self.consume_keyword(Keyword.Match)
+
+        // parse match expression
+        Expr match_expr = self.parse_expr()
+
+        // consume '{'
+        self.consume_keyword(Keyword.LBrace)
+
+        Vec<(Pattern, Vec<Stmt>)> arms = Vec<(Pattern, Vec<Stmt>)>.new()
+
+        // parse match arms
+        while not self.peek().is_keyword(Keyword.RBrace) {
+            Pattern pattern = self.parse_pattern()
+
+            Vec<Stmt> arm_body = self.parse_braced_stmt_block()
+
+            (Pattern, Vec<Stmt>) arm = (pattern, arm_body)
+            arms.push(arm)
+        }
+
+        // consume '}'
+        self.consume_keyword(Keyword.RBrace)
+
+        return Stmt.Match(match_expr, arms)
+    }
+
+    Stmt parse_return() {
+        // consume 'return'
+        self.consume_keyword(Keyword.Return)
+
+        Option<Expr> value = Option<Expr>.None
+
+        if not self.peek().is_keyword(Keyword.Semicolon) {
+            value = Option<Expr>.Some(self.parse_expr())
+        }
+
+        // consume ';'
+        self.consume_keyword(Keyword.Semicolon)
+
+        return Stmt.Return(value)
+    }
+
+    Stmt parse_break() {
+        // consume 'break'
+        self.consume_keyword(Keyword.Break)
+
+        // consume ';'
+        self.consume_keyword(Keyword.Semicolon)
+
+        return Stmt.Break
+    }
+
+    Stmt parse_continue() {
+        // consume 'continue'
+        self.consume_keyword(Keyword.Continue)
+
+        // consume ';'
+        self.consume_keyword(Keyword.Semicolon)
+
+        return Stmt.Continue
+    }
+
+    Stmt parse_expr_stmt() {
+        Expr expr = self.parse_expr()
+
+        // consume ';'
+        self.consume_keyword(Keyword.Semicolon)
+
+        return Stmt.ExprStmt(expr)
+    }
+
+    Expr parse_expr() {
+        return self.parse_expr_bp(1)
+    }
+
+    // 表达式解析（Pratt parser 算法核心）
+    // 输入:
+    // - min_bp: 当前遇到的中缀运算符的最低的左结合优先级要求（binding power）。
+    //   数值越大表示优先级要求越高，低于该阈值的中缀运算符不会在本层被吸收。
+    // 输出:
+    // - 返回一个 Expr，表示从当前位置开始、在 min_bp 约束下可归约出的最大表达式子树。
+    // 算法思路:
+    // 1) 先解析前缀部分，得到 left（例如字面量、标识符、括号表达式、一元运算等）。
+    // 2) 循环查看下一个 token 是否是中缀运算符；若不是则结束。
+    // 3) 读取该运算符的 (left_bp, right_bp):
+    //    - 若 left_bp < min_bp，说明该运算符优先级不足，应交给外层调用处理，当前层结束。
+    //    - 否则消费该运算符，并以 right_bp 递归解析右侧表达式，保证结合性正确。
+    // 4) 将 left 与 right 组装成新的二元表达式，再继续尝试吸收后续运算符。
+    Expr parse_expr_bp(u64 min_bp) {
+        Expr left = self.parse_prefix_expr()
+
+        loop {
+            Token token = self.peek()
+            match token.data {
+                Kw as t {
+                    // TODO: 参看算法思路, 此空为本次实验最难的部分
+                }
+                _ { break }
+            }
+        }
+
+        return left
+    }
+
+    // 前缀表达式解析
+    // 输入:
+    // - 无
+    // 输出:
+    // - 返回一个 Expr，表示一个完整的“起始表达式”。
+    // 算法思路:
+    // 1) 先看当前 token 是否为前缀一元运算符（-、*、&、~、not）或特殊前缀关键字（dyn、true、false）。
+    // 2) 若命中一元运算符:
+    //    - 消费运算符
+    //    - 以较高绑定力（这里是 12）递归解析操作数，避免被低优先级中缀运算打断
+    //    - 组装为 Expr.Unary
+    // 3) 若命中 dyn:
+    //    - 解析基础类型
+    //    - 可选解析数组长度 dyn T[expr]
+    //    - 组装为 Expr.Dyn
+    // 4) 若是 true/false，直接构造布尔字面量表达式。
+    // 5) 否则退化为“主表达式 + 后缀链”:
+    //    - 先 parse_primary_expr()
+    //    - 再 parse_postfix_expr(expr) 反复吸收调用/字段/下标等后缀。
+    Expr parse_prefix_expr() {
+        Token token = self.peek()
+
+        match token.data {
+            Kw as t {
+                match t.kw {
+                    // TODO: 参看算法思路，需要处理的情况: Minus, Star, Ampersand, Tilde, Not, Dyn, True, False
+                    _ {}
+                }
+            }
+            _ {}
+        }
+
+        Expr expr = self.parse_primary_expr()
+        return self.parse_postfix_expr(expr)
+    }
+
+    // 主表达式解析
+    // 输入:
+    // - 无
+    // 输出:
+    // - 返回 Expr，类型可能是标识符、字面量、括号表达式或字面量数组。
+    // 算法思路:
+    // 1) 消费一个 token。
+    // 2) 按 token 类型分支:
+    //    - Ident: 构造 Expr.Ident。
+    //    - Lit:   通过 Literal.from_token 转成字面量后构造 Expr.Lit。
+    //    - Kw:
+    //      - LParen: 递归解析内部表达式并要求右括号闭合，返回内部表达式。
+    //      - LBracket: 解析数组字面量 [lit, lit, ...]，元素由 parse_literal_value 读取。
+    // 3) 其他 token 一律报错。
+    Expr parse_primary_expr() {
+        Token token = self.next()
+
+        match token.data {
+            Ident as t { return Expr.Ident(t.name) }
+            Lit as t { return Expr.Lit(Literal.from_token(token)) }
+            Kw as t {
+                match t.kw {
+                    // TODO: 参看算法思路，需要处理的情况: LParen, LBracket
+                    _ { self.error(token) }
+                }
+            }
+            _ { self.error(token) }
+        }
+
+        // Unreachable
+        return Expr.Lit(Literal.Int(0))
+    }
+
+    Literal parse_literal_value() {
+        Token token = self.next()
+
+        match token.data {
+            Lit as t { return Literal.from_token(token) }
+            Kw as t {
+                match t.kw {
+                    True { return Literal.Bool(true) }
+                    False { return Literal.Bool(false) }
+                    _ { self.error(token) }
+                }
+            }
+            _ { self.error(token) }
+        }
+        // Unreachable
+        return Literal.Int(0)
+    }
+
+    // 后缀表达式解析
+    // 输入:
+    // - expr: 已经解析好的基础表达式
+    // 输出:
+    // - 返回扩展后的 Expr，吸收尽可能长的后缀链。
+    // 算法思路:
+    // 1) 循环查看下一个 token，若是后缀起始符号则继续，否则结束。
+    // 2) 支持三类后缀:
+    //    - 调用 (...)：解析参数列表；仅允许对标识符进行调用，生成 Expr.Call。
+    //    - 字段访问 .field：读取字段名，生成 Expr.FieldAccess。
+    //    - 下标访问 [index]：解析索引表达式，使用 BinaryOp.Index 组装索引表达式。
+    // 3) 每解析一个后缀，都把 expr 更新为新结果，再进入下一轮，实现链式解析：如 a(c)[i].d。
+    // 4) 遇到非后缀 token 退出循环并返回最终 expr。
+    Expr parse_postfix_expr(Expr expr) {
+        loop {
+            Token token = self.peek()
+            match token.data {
+                Kw as t {
+                    match t.kw {
+                        // TODO: 参看算法思路，需要处理的情况: LParen, Dot, LBracket
+                        _ { break }
+                    }
+                }
+                _ { break }
+            }
+        }
+
+        return expr
+    }
+}
