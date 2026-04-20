@@ -362,3 +362,4 @@ labs/
 compiler/frontend/grammar/src/parser.c
 
 .github/AGENTS.md
+reports/
